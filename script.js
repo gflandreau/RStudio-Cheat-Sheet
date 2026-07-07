@@ -109,6 +109,20 @@
     document.getElementById("colorNote").textContent = COLOR_NOTE;
   }
 
+  function renderGrayRamp() {
+    const grid = document.getElementById("grayGrid");
+    grid.innerHTML = GRAY_RAMP.map(
+      (c) => `
+        <div class="swatch">
+          <div class="swatch-color" style="background:${escapeHtml(c.hex)}"></div>
+          <div class="swatch-label">
+            <span class="swatch-name">${escapeHtml(c.name)}</span>
+            <span class="swatch-hex">${escapeHtml(c.hex)}</span>
+          </div>
+        </div>`
+    ).join("");
+  }
+
   function renderPalettes() {
     const container = document.getElementById("paletteGrid");
     container.innerHTML = PALETTES.map((p) => `
@@ -128,5 +142,6 @@
   buildNav();
   render();
   renderColors();
+  renderGrayRamp();
   renderPalettes();
 })();

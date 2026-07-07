@@ -14,6 +14,12 @@ const CATEGORIES = [
   { id: "rvest",      name: "rvest",      blurb: "Web scraping: pull data out of HTML pages." },
   { id: "scales",     name: "scales",     blurb: "Axis/label formatting and palette helpers." },
   { id: "tidyverse",  name: "Tidyverse misc", blurb: "purrr, tibble, readr, and other tidyverse odds and ends." },
+  { id: "forcats",    name: "forcats",    blurb: "Reordering, collapsing, and cleaning up factor levels." },
+  { id: "stats",      name: "Stats & modeling", blurb: "Base R modeling and hypothesis-testing functions." },
+  { id: "broom",      name: "broom",      blurb: "Turn model objects into tidy data frames." },
+  { id: "janitor",    name: "janitor",    blurb: "Fast data-cleaning helpers: names, duplicates, tables." },
+  { id: "tidytext",   name: "tidytext",   blurb: "Tokenizing, tidying, and analyzing text data." },
+  { id: "knitr",      name: "knitr",      blurb: "Rendering reports and formatting output tables." },
 ];
 
 const ENTRIES = [
@@ -220,4 +226,76 @@ const ENTRIES = [
   { cat: "tidyverse", fn: "read_excel(path, sheet) [readxl]", desc: "Read an Excel spreadsheet into a data frame.", example: 'readxl::read_excel("data.xlsx", sheet = 1)', tags: ["import","excel","io"] },
   { cat: "tidyverse", fn: "%>% / |> (pipe)", desc: "Pipe the left-hand result into the first argument of the right-hand function. |> is base R's native pipe; %>% is magrittr's (used throughout tidyverse).", example: "df %>% filter(age > 21) %>% summarise(n = n())", tags: ["pipe","chain","syntax"] },
   { cat: "tidyverse", fn: "here::here(...)", desc: "Build file paths relative to the project root, avoiding fragile setwd() calls.", example: 'read_csv(here::here("data", "raw.csv"))', tags: ["path","file","project"] },
+
+  // ---------------- forcats ----------------
+  { cat: "forcats", fn: "fct_reorder(f, x, .fun = median)", desc: "Reorder factor levels by another variable — fixes bars/lines plotting in a meaningless order.", example: "mutate(df, category = fct_reorder(category, value))", tags: ["reorder","factor","ggplot","order"] },
+  { cat: "forcats", fn: "fct_infreq(f)", desc: "Reorder factor levels by descending frequency.", example: "fct_infreq(df$category)", tags: ["reorder","factor","frequency"] },
+  { cat: "forcats", fn: "fct_rev(f)", desc: "Reverse the order of factor levels.", example: "fct_rev(df$category)", tags: ["reverse","factor","order"] },
+  { cat: "forcats", fn: "fct_lump(f, n)", desc: "Lump the rarest levels together into an \"Other\" category, keeping the top n.", example: "fct_lump(df$category, n = 5)", tags: ["lump","other","collapse","factor"] },
+  { cat: "forcats", fn: "fct_relevel(f, ...)", desc: "Manually move specific levels to the front (or a given position).", example: 'fct_relevel(df$grade, "Low", "Mid", "High")', tags: ["reorder","factor","manual"] },
+  { cat: "forcats", fn: "fct_recode(f, ...)", desc: "Rename factor levels by hand, new = old.", example: 'fct_recode(df$sex, "Male" = "M", "Female" = "F")', tags: ["rename","recode","factor"] },
+  { cat: "forcats", fn: "fct_collapse(f, ...)", desc: "Group several existing levels into one new level.", example: 'fct_collapse(df$state, West = c("CA","OR","WA"))', tags: ["collapse","group","factor","recode"] },
+  { cat: "forcats", fn: "fct_drop(f)", desc: "Drop unused (zero-count) factor levels.", example: "fct_drop(df$category)", tags: ["drop","unused","factor","clean"] },
+  { cat: "forcats", fn: "fct_explicit_na(f, na_level)", desc: "Give NA values their own explicit factor level instead of silently dropping them.", example: 'fct_explicit_na(df$category, na_level = "(Missing)")', tags: ["missing","na","factor"] },
+  { cat: "forcats", fn: "fct_count(f)", desc: "Count observations in each factor level (like table(), but returns a tibble).", example: "fct_count(df$category)", tags: ["count","tabulate","factor"] },
+  { cat: "forcats", fn: "as_factor(x)", desc: "Convert to factor preserving order of first appearance, unlike base as.factor() which sorts alphabetically.", example: "as_factor(df$category)", tags: ["convert","factor","order"] },
+  { cat: "forcats", fn: "fct_unify(fs)", desc: "Standardize levels across a list of factors so they all share the same set.", example: "fct_unify(list(df1$grp, df2$grp))", tags: ["combine","factor","levels"] },
+
+  // ---------------- Stats & modeling (base R) ----------------
+  { cat: "stats", fn: "lm(formula, data)", desc: "Fit a linear regression model.", example: "model <- lm(mpg ~ wt + hp, data = mtcars)", tags: ["regression","linear model","fit"] },
+  { cat: "stats", fn: "glm(formula, family, data)", desc: "Fit a generalized linear model (e.g. logistic regression with family = binomial).", example: 'glm(passed ~ hours, data = df, family = binomial)', tags: ["logistic","regression","glm"] },
+  { cat: "stats", fn: "summary(model)", desc: "View a fitted model's coefficients, standard errors, p-values, and R-squared.", example: "summary(model)", tags: ["model","output","coefficients"] },
+  { cat: "stats", fn: "predict(model, newdata)", desc: "Generate predictions from a fitted model on new data.", example: "predict(model, newdata = test_df)", tags: ["predict","forecast","model"] },
+  { cat: "stats", fn: "residuals(model) / resid(model)", desc: "Extract a model's residuals (observed minus fitted).", example: "residuals(model)", tags: ["residuals","diagnostics","model"] },
+  { cat: "stats", fn: "fitted(model)", desc: "Extract a model's fitted (predicted) values for the training data.", example: "fitted(model)", tags: ["fitted","predicted","model"] },
+  { cat: "stats", fn: "coef(model)", desc: "Extract a model's estimated coefficients.", example: "coef(model)", tags: ["coefficients","model"] },
+  { cat: "stats", fn: "confint(model)", desc: "Confidence intervals for a model's coefficients.", example: "confint(model, level = 0.95)", tags: ["confidence interval","model"] },
+  { cat: "stats", fn: "anova(model1, model2)", desc: "Compare nested models, or produce an ANOVA table for a single model.", example: "anova(small_model, big_model)", tags: ["anova","compare","model"] },
+  { cat: "stats", fn: "aov(formula, data)", desc: "Fit an analysis-of-variance model.", example: "aov(score ~ group, data = df)", tags: ["anova","fit","group comparison"] },
+  { cat: "stats", fn: "t.test(x, y)", desc: "One-sample or two-sample t-test for comparing means.", example: "t.test(df$score ~ df$group)", tags: ["t-test","hypothesis test","compare means"] },
+  { cat: "stats", fn: "cor(x, y) / cor.test(x, y)", desc: "Correlation coefficient, and a test of its significance.", example: "cor.test(df$x, df$y)", tags: ["correlation","test"] },
+  { cat: "stats", fn: "chisq.test(x)", desc: "Chi-squared test of independence/goodness of fit on a table.", example: "chisq.test(table(df$a, df$b))", tags: ["chi-squared","categorical","test"] },
+  { cat: "stats", fn: "wilcox.test(x, y)", desc: "Non-parametric rank-based test (Mann-Whitney/Wilcoxon), an alternative to t.test.", example: "wilcox.test(df$score ~ df$group)", tags: ["nonparametric","test","rank"] },
+  { cat: "stats", fn: "shapiro.test(x)", desc: "Test whether a sample looks normally distributed.", example: "shapiro.test(df$residuals)", tags: ["normality","test","assumption"] },
+  { cat: "stats", fn: "AIC(model) / BIC(model)", desc: "Information criteria for comparing model fit vs. complexity (lower is better).", example: "AIC(model1, model2)", tags: ["model selection","compare","criteria"] },
+  { cat: "stats", fn: "step(model)", desc: "Stepwise variable selection by AIC (forward/backward/both).", example: 'step(model, direction = "both")', tags: ["stepwise","model selection","variables"] },
+  { cat: "stats", fn: "y ~ x1 + x2 (formula syntax)", desc: "R's formula notation: response ~ predictors. Use * for main effects + interaction, : for interaction only, - to remove a term.", example: "mpg ~ wt * hp", tags: ["formula","syntax","model"] },
+
+  // ---------------- broom ----------------
+  { cat: "broom", fn: "tidy(model)", desc: "Turn a model's coefficients into a tidy data frame (term, estimate, std.error, p.value).", example: "tidy(model)", tags: ["model","output","tidy","coefficients"] },
+  { cat: "broom", fn: "tidy(model, conf.int = TRUE)", desc: "Same as tidy(), plus confidence interval columns for each term.", example: "tidy(model, conf.int = TRUE)", tags: ["model","confidence interval","tidy"] },
+  { cat: "broom", fn: "glance(model)", desc: "One-row summary of overall model fit (R-squared, AIC, BIC, p-value, etc).", example: "glance(model)", tags: ["model","summary","fit","r-squared"] },
+  { cat: "broom", fn: "augment(model, data)", desc: "Append fitted values, residuals, and diagnostics (like .cooksd) onto the original data.", example: "augment(model, data = mtcars)", tags: ["model","diagnostics","residuals","fitted"] },
+
+  // ---------------- janitor ----------------
+  { cat: "janitor", fn: "clean_names(dat)", desc: "Convert all column names to consistent snake_case, stripping spaces/punctuation.", example: "clean_names(df)", tags: ["names","clean","columns","snake_case"] },
+  { cat: "janitor", fn: "tabyl(dat, var1, var2)", desc: "Frequency table (1-way or 2-way) that returns a tidy data frame — nicer than base table().", example: "tabyl(df, category)", tags: ["frequency","table","count"] },
+  { cat: "janitor", fn: "adorn_totals(dat, where)", desc: "Add row and/or column totals to a tabyl summary.", example: 'tabyl(df, a, b) %>% adorn_totals(c("row","col"))', tags: ["totals","table","summary"] },
+  { cat: "janitor", fn: "adorn_percentages(dat, denominator)", desc: "Convert a tabyl's counts into row/column/total percentages.", example: 'tabyl(df, a, b) %>% adorn_percentages("row")', tags: ["percent","table","proportion"] },
+  { cat: "janitor", fn: "get_dupes(dat, ...)", desc: "Find and return all rows that are duplicates on specified key columns.", example: "get_dupes(df, id)", tags: ["duplicates","find","clean"] },
+  { cat: "janitor", fn: "remove_empty(dat, which)", desc: "Drop entirely empty rows and/or columns.", example: 'remove_empty(df, which = c("rows","cols"))', tags: ["empty","clean","drop"] },
+  { cat: "janitor", fn: "remove_constant(dat)", desc: "Drop columns that only contain one unique value.", example: "remove_constant(df)", tags: ["constant","clean","drop","columns"] },
+  { cat: "janitor", fn: "round_half_up(x, digits)", desc: "Rounds .5 values up consistently, fixing base R round()'s banker's-rounding surprise.", example: "round_half_up(2.5)", tags: ["round","number","fix"] },
+  { cat: "janitor", fn: "excel_numeric_to_date(x)", desc: "Convert Excel's numeric date serial values into proper Date objects.", example: "excel_numeric_to_date(44197)", tags: ["excel","date","convert"] },
+  { cat: "janitor", fn: "compare_df_cols(...)", desc: "Compare column names and types across multiple data frames — handy before bind_rows().", example: "compare_df_cols(df1, df2)", tags: ["compare","columns","dataframe"] },
+
+  // ---------------- tidytext ----------------
+  { cat: "tidytext", fn: "unnest_tokens(output, input, token)", desc: "Split text into one-token-per-row (words, ngrams, sentences, etc).", example: 'unnest_tokens(df, word, text)', tags: ["tokenize","text","words"] },
+  { cat: "tidytext", fn: "unnest_tokens(..., token = \"ngrams\", n = 2)", desc: "Tokenize into n-grams (e.g. bigrams) instead of single words.", example: 'unnest_tokens(df, bigram, text, token = "ngrams", n = 2)', tags: ["ngram","bigram","tokenize"] },
+  { cat: "tidytext", fn: "get_stopwords() / stop_words", desc: "Built-in stopword lexicons for filtering out common low-information words.", example: "anti_join(word_df, stop_words)", tags: ["stopwords","filter","text cleaning"] },
+  { cat: "tidytext", fn: "anti_join(data, stop_words)", desc: "Common pattern to remove stopwords after unnest_tokens().", example: "df %>% unnest_tokens(word, text) %>% anti_join(stop_words)", tags: ["stopwords","clean","text"] },
+  { cat: "tidytext", fn: "bind_tf_idf(data, term, document, n)", desc: "Compute term frequency-inverse document frequency to find words distinctive to each document.", example: "bind_tf_idf(word_counts, word, document, n)", tags: ["tf-idf","text mining","weighting"] },
+  { cat: "tidytext", fn: "get_sentiments(lexicon)", desc: "Load a sentiment lexicon (\"bing\", \"afinn\", \"nrc\", \"loughran\") for sentiment analysis.", example: 'get_sentiments("bing")', tags: ["sentiment","lexicon","text"] },
+  { cat: "tidytext", fn: "inner_join(word_df, get_sentiments(...))", desc: "Common pattern to attach sentiment scores to tokenized words.", example: 'df %>% unnest_tokens(word, text) %>% inner_join(get_sentiments("bing"))', tags: ["sentiment","join","text analysis"] },
+  { cat: "tidytext", fn: "cast_dtm(data, document, term, value) / cast_sparse(...)", desc: "Convert tidy word-count data into a document-term matrix for topic modeling etc.", example: "cast_dtm(word_counts, document, word, n)", tags: ["document-term matrix","topic modeling","convert"] },
+  { cat: "tidytext", fn: "count(data, document, word, sort = TRUE)", desc: "Common dplyr pattern after tokenizing: count word frequency per document.", example: "df %>% unnest_tokens(word, text) %>% count(document, word, sort = TRUE)", tags: ["count","frequency","word"] },
+
+  // ---------------- knitr ----------------
+  { cat: "knitr", fn: "knit(input)", desc: "Render an R Markdown/Rnw source file into its output document.", example: 'knitr::knit("report.Rmd")', tags: ["render","report","rmarkdown"] },
+  { cat: "knitr", fn: "kable(x, format, digits, col.names)", desc: "Format a data frame as a simple, clean table for HTML/PDF/Word reports.", example: 'knitr::kable(df, digits = 2, caption = "Results")', tags: ["table","report","format"] },
+  { cat: "knitr", fn: "opts_chunk$set(...)", desc: "Set global default chunk options (echo, warning, message, fig.width, etc.) for the whole document.", example: "knitr::opts_chunk$set(echo = FALSE, warning = FALSE)", tags: ["chunk","options","rmarkdown"] },
+  { cat: "knitr", fn: "include_graphics(path)", desc: "Embed an external image file in a knitted report.", example: 'knitr::include_graphics("figures/plot.png")', tags: ["image","embed","report"] },
+  { cat: "knitr", fn: "read_chunk(path)", desc: "Import labeled code chunks from an external .R script to reuse in a report.", example: 'knitr::read_chunk("analysis.R")', tags: ["chunk","external","reuse"] },
+  { cat: "knitr", fn: "purl(input)", desc: "Extract just the R code from an Rmd file into a plain .R script.", example: 'knitr::purl("report.Rmd")', tags: ["extract","code","script"] },
+  { cat: "knitr", fn: "```{r chunk-name, echo=FALSE}", desc: "Chunk header syntax: label the chunk, then set per-chunk options like echo/eval/warning/fig.height.", example: "```{r plot1, echo=FALSE, fig.height=4}", tags: ["chunk","syntax","rmarkdown"] },
 ];
