@@ -405,11 +405,18 @@ code, .mono { font-family: "JetBrains Mono", "Consolas", monospace; }
   border-radius: 4px;
 }
 
-.theme-card .fn-name {
-  font-family: "JetBrains Mono", monospace;
-  font-size: 0.85rem;
+.theme-name {
+  font-size: 1.15rem;
   font-weight: 600;
-  padding: 0.6rem 0.75rem 0;
+  padding: 0.65rem 0.75rem 0;
+  text-transform: capitalize;
+  color: var(--ink);
+}
+
+.theme-font-label {
+  font-size: 0.68rem;
+  color: var(--ink-soft);
+  padding: 0.15rem 0.75rem 0;
 }
 
 .theme-card .fn-example {

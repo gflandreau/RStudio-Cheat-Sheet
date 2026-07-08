@@ -263,42 +263,44 @@ const PALETTES = [
 // Representative colors for base Shiny (no theme) and every shinythemes
 // theme, so you can see the vibe of each at a glance. bg = page background,
 // primary = navbar/button color, accent = secondary highlight color.
+// font/fontLabel come from each theme's actual Bootswatch _variables.scss
+// (headings-font-family, or font-family-sans-serif where headings inherit).
 const SHINY_THEMES = [
-  { name: "Default (no theme)", code: "fluidPage(...)  # Bootstrap default, no shinytheme()", bg: "#f5f5f5", primary: "#337ab7", accent: "#5bc0de" },
-  { name: "cerulean",  code: 'shinytheme("cerulean")',  bg: "#ffffff", primary: "#2fa4e7", accent: "#033c73" },
-  { name: "cosmo",     code: 'shinytheme("cosmo")',     bg: "#ffffff", primary: "#2780e3", accent: "#373a3c" },
-  { name: "cyborg",    code: 'shinytheme("cyborg")',    bg: "#060606", primary: "#2a9fd6", accent: "#adafae" },
-  { name: "darkly",    code: 'shinytheme("darkly")',    bg: "#222222", primary: "#375a7d", accent: "#00bc8c" },
-  { name: "flatly",    code: 'shinytheme("flatly")',    bg: "#ffffff", primary: "#2c3e50", accent: "#18bc9c" },
-  { name: "journal",   code: 'shinytheme("journal")',   bg: "#ffffff", primary: "#eb6864", accent: "#22b24c" },
-  { name: "lumen",     code: 'shinytheme("lumen")',     bg: "#ffffff", primary: "#158cba", accent: "#f0ad4e" },
-  { name: "paper",     code: 'shinytheme("paper")',     bg: "#ffffff", primary: "#2196f3", accent: "#f5f5f5" },
-  { name: "readable",  code: 'shinytheme("readable")',  bg: "#ffffff", primary: "#4582ec", accent: "#212529" },
-  { name: "sandstone", code: 'shinytheme("sandstone")', bg: "#f8f5f0", primary: "#325d88", accent: "#8e8c84" },
-  { name: "simplex",   code: 'shinytheme("simplex")',   bg: "#ffffff", primary: "#d9230f", accent: "#0f6cbf" },
-  { name: "slate",     code: 'shinytheme("slate")',     bg: "#272b30", primary: "#7a8288", accent: "#3a3f44" },
-  { name: "spacelab",  code: 'shinytheme("spacelab")',  bg: "#ffffff", primary: "#446e9b", accent: "#3cb521" },
-  { name: "superhero", code: 'shinytheme("superhero")', bg: "#2b3e50", primary: "#df691a", accent: "#4e5d6c" },
-  { name: "united",    code: 'shinytheme("united")',    bg: "#ffffff", primary: "#772953", accent: "#dd4814" },
-  { name: "yeti",      code: 'shinytheme("yeti")',      bg: "#ffffff", primary: "#008cba", accent: "#adafae" },
+  { name: "Default (no theme)", code: "fluidPage(...)  # Bootstrap default, no shinytheme()", bg: "#f5f5f5", primary: "#337ab7", accent: "#5bc0de", font: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif", fontLabel: "System default" },
+  { name: "cerulean",  code: 'shinytheme("cerulean")',  bg: "#ffffff", primary: "#2fa4e7", accent: "#033c73", font: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif", fontLabel: "System default" },
+  { name: "cosmo",     code: 'shinytheme("cosmo")',     bg: "#ffffff", primary: "#2780e3", accent: "#373a3c", font: "'Source Sans Pro', sans-serif", fontLabel: "Source Sans Pro" },
+  { name: "cyborg",    code: 'shinytheme("cyborg")',    bg: "#060606", primary: "#2a9fd6", accent: "#adafae", font: "Roboto, sans-serif", fontLabel: "Roboto" },
+  { name: "darkly",    code: 'shinytheme("darkly")',    bg: "#222222", primary: "#375a7d", accent: "#00bc8c", font: "Lato, sans-serif", fontLabel: "Lato" },
+  { name: "flatly",    code: 'shinytheme("flatly")',    bg: "#ffffff", primary: "#2c3e50", accent: "#18bc9c", font: "Lato, sans-serif", fontLabel: "Lato" },
+  { name: "journal",   code: 'shinytheme("journal")',   bg: "#ffffff", primary: "#eb6864", accent: "#22b24c", font: "'News Cycle', sans-serif", fontLabel: "News Cycle" },
+  { name: "lumen",     code: 'shinytheme("lumen")',     bg: "#ffffff", primary: "#158cba", accent: "#f0ad4e", font: "'Source Sans Pro', sans-serif", fontLabel: "Source Sans Pro" },
+  { name: "paper",     code: 'shinytheme("paper")',     bg: "#ffffff", primary: "#2196f3", accent: "#f5f5f5", font: "Roboto, sans-serif", fontLabel: "Roboto" },
+  { name: "readable",  code: 'shinytheme("readable")',  bg: "#ffffff", primary: "#4582ec", accent: "#212529", font: "Raleway, sans-serif", fontLabel: "Raleway (body text is Georgia)" },
+  { name: "sandstone", code: 'shinytheme("sandstone")', bg: "#f8f5f0", primary: "#325d88", accent: "#8e8c84", font: "Roboto, sans-serif", fontLabel: "Roboto" },
+  { name: "simplex",   code: 'shinytheme("simplex")',   bg: "#ffffff", primary: "#d9230f", accent: "#0f6cbf", font: "'Open Sans', sans-serif", fontLabel: "Open Sans" },
+  { name: "slate",     code: 'shinytheme("slate")',     bg: "#272b30", primary: "#7a8288", accent: "#3a3f44", font: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif", fontLabel: "System default" },
+  { name: "spacelab",  code: 'shinytheme("spacelab")',  bg: "#ffffff", primary: "#446e9b", accent: "#3cb521", font: "'Open Sans', sans-serif", fontLabel: "Open Sans" },
+  { name: "superhero", code: 'shinytheme("superhero")', bg: "#2b3e50", primary: "#df691a", accent: "#4e5d6c", font: "Lato, sans-serif", fontLabel: "Lato" },
+  { name: "united",    code: 'shinytheme("united")',    bg: "#ffffff", primary: "#772953", accent: "#dd4814", font: "Ubuntu, sans-serif", fontLabel: "Ubuntu" },
+  { name: "yeti",      code: 'shinytheme("yeti")',      bg: "#ffffff", primary: "#008cba", accent: "#adafae", font: "'Open Sans', sans-serif", fontLabel: "Open Sans" },
 ];
 
-const SHINY_THEME_NOTE = "Swatches are approximate representative colors for each theme's background/navbar/accent, meant to give a quick visual sense — exact shades depend on the Bootstrap version. For a pixel-accurate live preview, run shinythemes::themeSelector() inside an app.";
+const SHINY_THEME_NOTE = "Swatches are approximate representative colors for each theme's background/navbar/accent, and each theme's name is set in its actual heading font (pulled from Bootswatch's own _variables.scss) — themes without a custom font just use the system default. For a pixel-accurate live preview, run shinythemes::themeSelector() inside an app.";
 
 // bslib supports Bootstrap 4/5 versions of every theme name above (same
 // visual family, slightly refreshed) plus these Bootstrap 4/5-only themes.
 const BSLIB_THEMES = [
-  { name: "minty",   code: 'bs_theme(bootswatch = "minty")',   bg: "#ffffff", primary: "#78c2ad", accent: "#ffce67" },
-  { name: "litera",  code: 'bs_theme(bootswatch = "litera")',  bg: "#ffffff", primary: "#4582ec", accent: "#02b875" },
-  { name: "lux",     code: 'bs_theme(bootswatch = "lux")',     bg: "#ffffff", primary: "#1a1a1a", accent: "#6f42c1" },
-  { name: "materia", code: 'bs_theme(bootswatch = "materia")', bg: "#fafafa", primary: "#2196f3", accent: "#ff4081" },
-  { name: "morph",   code: 'bs_theme(bootswatch = "morph")',   bg: "#eef2f7", primary: "#7952b3", accent: "#3a3f44" },
-  { name: "pulse",   code: 'bs_theme(bootswatch = "pulse")',   bg: "#ffffff", primary: "#593196", accent: "#e36209" },
-  { name: "quartz",  code: 'bs_theme(bootswatch = "quartz")',  bg: "#ffffff", primary: "#a57dff", accent: "#12d6bf" },
-  { name: "sketchy", code: 'bs_theme(bootswatch = "sketchy")', bg: "#ffffff", primary: "#333333", accent: "#e3ac6c" },
-  { name: "solar",   code: 'bs_theme(bootswatch = "solar")',   bg: "#002b36", primary: "#b58900", accent: "#268bd2" },
-  { name: "vapor",   code: 'bs_theme(bootswatch = "vapor")',   bg: "#1b1425", primary: "#ff71ce", accent: "#01cdfe" },
-  { name: "zephyr",  code: 'bs_theme(bootswatch = "zephyr")',  bg: "#ffffff", primary: "#337ab7", accent: "#f0ad4e" },
+  { name: "minty",   code: 'bs_theme(bootswatch = "minty")',   bg: "#ffffff", primary: "#78c2ad", accent: "#ffce67", font: "Montserrat, sans-serif", fontLabel: "Montserrat" },
+  { name: "litera",  code: 'bs_theme(bootswatch = "litera")',  bg: "#ffffff", primary: "#4582ec", accent: "#02b875", font: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif", fontLabel: "System default" },
+  { name: "lux",     code: 'bs_theme(bootswatch = "lux")',     bg: "#ffffff", primary: "#1a1a1a", accent: "#6f42c1", font: "'Nunito Sans', sans-serif", fontLabel: "Nunito Sans" },
+  { name: "materia", code: 'bs_theme(bootswatch = "materia")', bg: "#fafafa", primary: "#2196f3", accent: "#ff4081", font: "Roboto, sans-serif", fontLabel: "Roboto" },
+  { name: "morph",   code: 'bs_theme(bootswatch = "morph")',   bg: "#eef2f7", primary: "#7952b3", accent: "#3a3f44", font: "Nunito, sans-serif", fontLabel: "Nunito" },
+  { name: "pulse",   code: 'bs_theme(bootswatch = "pulse")',   bg: "#ffffff", primary: "#593196", accent: "#e36209", font: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif", fontLabel: "System default" },
+  { name: "quartz",  code: 'bs_theme(bootswatch = "quartz")',  bg: "#ffffff", primary: "#a57dff", accent: "#12d6bf", font: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif", fontLabel: "System default" },
+  { name: "sketchy", code: 'bs_theme(bootswatch = "sketchy")', bg: "#ffffff", primary: "#333333", accent: "#e3ac6c", font: "'Cabin Sketch', cursive", fontLabel: "Cabin Sketch (body is Neucha)" },
+  { name: "solar",   code: 'bs_theme(bootswatch = "solar")',   bg: "#002b36", primary: "#b58900", accent: "#268bd2", font: "'Source Sans Pro', sans-serif", fontLabel: "Source Sans Pro" },
+  { name: "vapor",   code: 'bs_theme(bootswatch = "vapor")',   bg: "#1b1425", primary: "#ff71ce", accent: "#01cdfe", font: "Lato, sans-serif", fontLabel: "Lato" },
+  { name: "zephyr",  code: 'bs_theme(bootswatch = "zephyr")',  bg: "#ffffff", primary: "#337ab7", accent: "#f0ad4e", font: "Inter, sans-serif", fontLabel: "Inter" },
 ];
 
 const BSLIB_THEME_NOTE = "bslib also includes Bootstrap 4/5 versions of every theme shown above (cerulean, cosmo, cyborg, darkly, flatly, journal, lumen, sandstone, simplex, slate, spacelab, superhero, united, yeti) in the same visual family, plus these themes unique to bslib. Swatches are approximate — run bslib::bs_theme_preview() for an exact live look.";
