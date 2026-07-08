@@ -21,6 +21,8 @@ const CATEGORIES = [
   { id: "tidytext",   name: "tidytext",   blurb: "Tokenizing, tidying, and analyzing text data." },
   { id: "knitr",      name: "knitr",      blurb: "Rendering reports and formatting output tables." },
   { id: "plotly",     name: "plotly",     blurb: "Interactive, zoomable, hoverable charts." },
+  { id: "shiny",      name: "shiny",      blurb: "Build interactive web apps in R." },
+  { id: "shinythemes", name: "shinythemes", blurb: "Ready-made Bootstrap themes for Shiny apps." },
 ];
 
 const ENTRIES = [
@@ -313,4 +315,31 @@ const ENTRIES = [
   { cat: "plotly", fn: "event_data(\"plotly_click\")", desc: "Capture interactive click/hover/selection events from a plot inside a Shiny app.", example: 'event_data("plotly_click", source = "myplot")', tags: ["shiny","event","interactive","click"] },
   { cat: "plotly", fn: "plotlyOutput(outputId) / renderPlotly({...})", desc: "Shiny UI/server pair for embedding a plotly plot in an app.", example: "output$plot <- renderPlotly({ plot_ly(df, x = ~x, y = ~y) })", tags: ["shiny","output","render"] },
   { cat: "plotly", fn: "save_image(p, file)", desc: "Export a plotly plot to a static image file (PNG, JPEG, PDF, SVG) — requires the kaleido engine.", example: 'save_image(p, "plot.png")', tags: ["export","save","image"] },
+
+  // ---------------- shiny ----------------
+  { cat: "shiny", fn: "shinyApp(ui, server)", desc: "Combine a UI definition and a server function into a runnable Shiny app.", example: "shinyApp(ui = ui, server = server)", tags: ["app","create","run"] },
+  { cat: "shiny", fn: "fluidPage(...)", desc: "Basic responsive page layout that resizes to the browser window — the standard top-level UI container.", example: 'fluidPage(titlePanel("My App"), ...)', tags: ["layout","ui","page"] },
+  { cat: "shiny", fn: "sidebarLayout(sidebarPanel(...), mainPanel(...))", desc: "Classic two-column layout: a sidebar of inputs next to a main panel of outputs.", example: "sidebarLayout(sidebarPanel(sliderInput(...)), mainPanel(plotOutput(\"p\")))", tags: ["layout","sidebar","ui"] },
+  { cat: "shiny", fn: "fluidRow(...) / column(width, ...)", desc: "Bootstrap-style 12-column grid system for custom layouts.", example: "fluidRow(column(6, plotOutput(\"a\")), column(6, plotOutput(\"b\")))", tags: ["layout","grid","columns"] },
+  { cat: "shiny", fn: "navbarPage(title, tabPanel(...), ...)", desc: "Multi-page app layout with a top navigation bar switching between tabs.", example: 'navbarPage("App", tabPanel("Home", ...), tabPanel("About", ...))', tags: ["layout","navigation","tabs","multi-page"] },
+  { cat: "shiny", fn: "textInput() / numericInput() / selectInput() / sliderInput() / checkboxInput() / dateInput()", desc: "Standard input widgets for collecting user input in the UI.", example: 'sliderInput("bins", "Bins:", min = 1, max = 50, value = 20)', tags: ["input","widget","ui"] },
+  { cat: "shiny", fn: "actionButton(inputId, label)", desc: "A clickable button whose input value increments each time it's clicked (pairs with observeEvent).", example: 'actionButton("go", "Run analysis")', tags: ["button","input","click"] },
+  { cat: "shiny", fn: "renderPlot({...}) / plotOutput(outputId)", desc: "Server/UI pair for displaying a reactive plot.", example: 'output$p <- renderPlot({ hist(data()) })  # UI: plotOutput("p")', tags: ["plot","output","render"] },
+  { cat: "shiny", fn: "renderText({...}) / textOutput(outputId)", desc: "Server/UI pair for displaying reactive text.", example: 'output$msg <- renderText({ paste("You picked", input$choice) })', tags: ["text","output","render"] },
+  { cat: "shiny", fn: "renderTable({...}) / tableOutput(outputId)", desc: "Server/UI pair for displaying a reactive data frame as a table.", example: "output$tbl <- renderTable({ filtered_data() })", tags: ["table","output","render"] },
+  { cat: "shiny", fn: "reactive({...})", desc: "Create a cached reactive expression that re-runs only when its inputs change.", example: 'filtered_data <- reactive({ df[df$year == input$year, ] })', tags: ["reactive","expression","cache"] },
+  { cat: "shiny", fn: "observeEvent(eventExpr, {...})", desc: "Run side-effect code in response to a specific event (like a button click), without returning a value.", example: 'observeEvent(input$go, { showNotification("Running!") })', tags: ["event","observer","side effect"] },
+  { cat: "shiny", fn: "eventReactive(eventExpr, {...})", desc: "A reactive expression that only recalculates when a specific event fires, not on every input change.", example: "result <- eventReactive(input$go, { run_model(input$n) })", tags: ["event","reactive"] },
+  { cat: "shiny", fn: "req(x)", desc: "Halt reactive execution gracefully if a value is missing/falsy — prevents errors from empty inputs.", example: "req(input$file)", tags: ["validate","guard","require"] },
+  { cat: "shiny", fn: "validate(need(cond, message))", desc: "Show a user-facing message in place of output when a condition isn't met.", example: 'validate(need(input$n > 0, "Please enter a positive number"))', tags: ["validate","error message","input"] },
+  { cat: "shiny", fn: "updateSelectInput() / updateSliderInput() / update*Input()", desc: "Change an input widget's value/choices from the server after the app has loaded.", example: 'updateSelectInput(session, "choice", choices = new_choices)', tags: ["update","input","dynamic"] },
+  { cat: "shiny", fn: "isolate({...})", desc: "Read a reactive value without creating a dependency on it (won't trigger re-execution).", example: "isolate(input$slider)", tags: ["reactive","isolate","dependency"] },
+  { cat: "shiny", fn: "observe({...})", desc: "Automatically re-run a block whenever any reactive value it reads changes.", example: 'observe({ print(input$slider) })', tags: ["reactive","observer","watch"] },
+  { cat: "shiny", fn: "withProgress({...}, message) / incProgress(amount)", desc: "Show a progress bar in the UI during a long-running server computation.", example: 'withProgress(message = "Computing...", { for (i in 1:10) { incProgress(0.1) } })', tags: ["progress","loading","feedback"] },
+  { cat: "shiny", fn: "runApp(appDir)", desc: "Launch a Shiny app from a directory (or use the Run App button in RStudio).", example: 'runApp("my_app")', tags: ["run","launch","app"] },
+
+  // ---------------- shinythemes ----------------
+  { cat: "shinythemes", fn: "shinytheme(theme)", desc: "Apply a ready-made Bootstrap theme to a fluidPage()/navbarPage() app.", example: 'fluidPage(theme = shinytheme("flatly"), ...)', tags: ["theme","style","bootstrap"] },
+  { cat: "shinythemes", fn: "themeSelector()", desc: "Drop-in widget that lets you preview and switch between all available themes live in a running app.", example: "fluidPage(themeSelector(), ...)", tags: ["theme","preview","dev tool"] },
+  { cat: "shinythemes", fn: "Available theme names", desc: "cerulean, cosmo, cyborg, darkly, flatly, journal, lumen, paper, readable, sandstone, simplex, slate, spacelab, superhero, united, yeti.", example: 'shinytheme("cyborg")', tags: ["theme","names","list"] },
 ];
