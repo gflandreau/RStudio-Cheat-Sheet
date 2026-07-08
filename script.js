@@ -9,8 +9,11 @@
   const searchBox = document.getElementById("searchBox");
   const searchCount = document.getElementById("searchCount");
   const categoryNav = document.getElementById("categoryNav");
+  const browseView = document.getElementById("browseView");
+  const customizationView = document.getElementById("customizationView");
 
   let activeCategory = "all";
+  let view = "browse";
 
   function escapeHtml(str) {
     return String(str)
@@ -31,22 +34,45 @@
     allBtn.className = "active";
     categoryNav.appendChild(allBtn);
 
-    CATEGORIES.forEach((c) => {
+    CATEGORIES.filter((c) => !c.hidden).forEach((c) => {
       const btn = document.createElement("button");
       btn.textContent = c.name;
       btn.dataset.cat = c.id;
       categoryNav.appendChild(btn);
     });
 
+    const customBtn = document.createElement("button");
+    customBtn.textContent = "Customization";
+    customBtn.dataset.view = "customization";
+    categoryNav.appendChild(customBtn);
+
     categoryNav.addEventListener("click", (e) => {
       const btn = e.target.closest("button");
       if (!btn) return;
-      activeCategory = btn.dataset.cat;
       [...categoryNav.querySelectorAll("button")].forEach((b) =>
         b.classList.toggle("active", b === btn)
       );
-      render();
+
+      if (btn.dataset.view === "customization") {
+        showCustomization();
+      } else {
+        activeCategory = btn.dataset.cat;
+        showBrowse();
+        render();
+      }
     });
+  }
+
+  function showCustomization() {
+    view = "customization";
+    browseView.hidden = true;
+    customizationView.hidden = false;
+  }
+
+  function showBrowse() {
+    view = "browse";
+    browseView.hidden = false;
+    customizationView.hidden = true;
   }
 
   function matches(entry, query) {
@@ -137,11 +163,34 @@
       </article>`).join("");
   }
 
-  searchBox.addEventListener("input", render);
+  function renderShinyThemes() {
+    const container = document.getElementById("shinyThemeGrid");
+    container.innerHTML = ENTRIES.filter((e) => e.cat === "shinythemes").map(cardHtml).join("");
+  }
+
+  searchBox.addEventListener("input", () => {
+    if (view === "customization" && searchBox.value.trim()) {
+      activeCategory = "all";
+      showBrowse();
+      [...categoryNav.querySelectorAll("button")].forEach((b) =>
+        b.classList.toggle("active", b.dataset.cat === "all")
+      );
+    }
+    render();
+  });
+
+  document.getElementById("emptyStateLink").addEventListener("click", (e) => {
+    e.preventDefault();
+    showCustomization();
+    [...categoryNav.querySelectorAll("button")].forEach((b) =>
+      b.classList.toggle("active", b.dataset.view === "customization")
+    );
+  });
 
   buildNav();
   render();
   renderColors();
   renderGrayRamp();
   renderPalettes();
+  renderShinyThemes();
 })();

@@ -28,17 +28,17 @@
   </div>
 </section>
 
-<main class="section">
+<main class="section" id="browseView">
   <div id="resultsMeta" class="results-meta"></div>
   <div id="cardGrid" class="card-grid"></div>
   <div id="emptyState" class="empty-state" hidden>
-    <p>No functions matched that search. Try a broader term, or check the <a href="#colors">Colors &amp; Palettes</a> section below.</p>
+    <p>No functions matched that search. Try a broader term, or check the <a href="#" id="emptyStateLink">Customization</a> tab.</p>
   </div>
 </main>
 
-<section class="section colors-section" id="colors">
-  <h2>Colors &amp; Palettes</h2>
-  <p class="section-sub">Base R named colors, organized by family, plus the palette functions from scales, RColorBrewer, and viridis.</p>
+<section class="section colors-section" id="customizationView" hidden>
+  <h2>Customization</h2>
+  <p class="section-sub">Base R named colors, package palette functions (scales, RColorBrewer, viridis), and Shiny themes &mdash; everything for styling plots and apps in one place.</p>
   <div class="accent-bar"></div>
 
   <div id="colorFamilies"></div>
@@ -50,6 +50,9 @@
 
   <h3 class="palette-heading">Package palettes &amp; scales</h3>
   <div id="paletteGrid" class="palette-grid"></div>
+
+  <h3 class="palette-heading">Shiny themes</h3>
+  <div id="shinyThemeGrid" class="card-grid"></div>
 </section>
 
 <footer class="footer">
