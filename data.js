@@ -22,7 +22,7 @@ const CATEGORIES = [
   { id: "knitr",      name: "knitr",      blurb: "Rendering reports and formatting output tables." },
   { id: "plotly",     name: "plotly",     blurb: "Interactive, zoomable, hoverable charts." },
   { id: "shiny",      name: "shiny",      blurb: "Build interactive web apps in R." },
-  { id: "shinythemes", name: "shinythemes", blurb: "Ready-made Bootstrap themes for Shiny apps.", hidden: true },
+  { id: "shinythemes", name: "shinythemes", blurb: "Ready-made Bootstrap themes for Shiny apps." },
 ];
 
 const ENTRIES = [

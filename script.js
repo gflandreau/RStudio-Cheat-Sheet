@@ -165,7 +165,19 @@
 
   function renderShinyThemes() {
     const container = document.getElementById("shinyThemeGrid");
-    container.innerHTML = ENTRIES.filter((e) => e.cat === "shinythemes").map(cardHtml).join("");
+    container.innerHTML = SHINY_THEMES.map(
+      (t) => `
+        <article class="theme-card">
+          <div class="theme-preview" style="background:${escapeHtml(t.bg)}">
+            <div class="theme-navbar" style="background:${escapeHtml(t.primary)}"></div>
+            <div class="theme-btn" style="background:${escapeHtml(t.accent)}"></div>
+          </div>
+          <div class="fn-name">${escapeHtml(t.name)}</div>
+          <pre class="fn-example">${escapeHtml(t.code)}</pre>
+        </article>`
+    ).join("");
+
+    document.getElementById("shinyThemeNote").textContent = SHINY_THEME_NOTE;
   }
 
   searchBox.addEventListener("input", () => {

@@ -259,3 +259,28 @@ const PALETTES = [
     tags: ["palette","custom","personal"],
   },
 ];
+
+// Representative colors for base Shiny (no theme) and every shinythemes
+// theme, so you can see the vibe of each at a glance. bg = page background,
+// primary = navbar/button color, accent = secondary highlight color.
+const SHINY_THEMES = [
+  { name: "Default (no theme)", code: "fluidPage(...)  # Bootstrap default, no shinytheme()", bg: "#f5f5f5", primary: "#337ab7", accent: "#5bc0de" },
+  { name: "cerulean",  code: 'shinytheme("cerulean")',  bg: "#ffffff", primary: "#2fa4e7", accent: "#033c73" },
+  { name: "cosmo",     code: 'shinytheme("cosmo")',     bg: "#ffffff", primary: "#2780e3", accent: "#373a3c" },
+  { name: "cyborg",    code: 'shinytheme("cyborg")',    bg: "#060606", primary: "#2a9fd6", accent: "#adafae" },
+  { name: "darkly",    code: 'shinytheme("darkly")',    bg: "#222222", primary: "#375a7d", accent: "#00bc8c" },
+  { name: "flatly",    code: 'shinytheme("flatly")',    bg: "#ffffff", primary: "#2c3e50", accent: "#18bc9c" },
+  { name: "journal",   code: 'shinytheme("journal")',   bg: "#ffffff", primary: "#eb6864", accent: "#22b24c" },
+  { name: "lumen",     code: 'shinytheme("lumen")',     bg: "#ffffff", primary: "#158cba", accent: "#f0ad4e" },
+  { name: "paper",     code: 'shinytheme("paper")',     bg: "#ffffff", primary: "#2196f3", accent: "#f5f5f5" },
+  { name: "readable",  code: 'shinytheme("readable")',  bg: "#ffffff", primary: "#4582ec", accent: "#212529" },
+  { name: "sandstone", code: 'shinytheme("sandstone")', bg: "#f8f5f0", primary: "#325d88", accent: "#8e8c84" },
+  { name: "simplex",   code: 'shinytheme("simplex")',   bg: "#ffffff", primary: "#d9230f", accent: "#0f6cbf" },
+  { name: "slate",     code: 'shinytheme("slate")',     bg: "#272b30", primary: "#7a8288", accent: "#3a3f44" },
+  { name: "spacelab",  code: 'shinytheme("spacelab")',  bg: "#ffffff", primary: "#446e9b", accent: "#3cb521" },
+  { name: "superhero", code: 'shinytheme("superhero")', bg: "#2b3e50", primary: "#df691a", accent: "#4e5d6c" },
+  { name: "united",    code: 'shinytheme("united")',    bg: "#ffffff", primary: "#772953", accent: "#dd4814" },
+  { name: "yeti",      code: 'shinytheme("yeti")',      bg: "#ffffff", primary: "#008cba", accent: "#adafae" },
+];
+
+const SHINY_THEME_NOTE = "Swatches are approximate representative colors for each theme's background/navbar/accent, meant to give a quick visual sense — exact shades depend on the Bootstrap version. For a pixel-accurate live preview, run shinythemes::themeSelector() inside an app.";
