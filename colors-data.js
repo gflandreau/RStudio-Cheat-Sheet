@@ -284,3 +284,21 @@ const SHINY_THEMES = [
 ];
 
 const SHINY_THEME_NOTE = "Swatches are approximate representative colors for each theme's background/navbar/accent, meant to give a quick visual sense — exact shades depend on the Bootstrap version. For a pixel-accurate live preview, run shinythemes::themeSelector() inside an app.";
+
+// bslib supports Bootstrap 4/5 versions of every theme name above (same
+// visual family, slightly refreshed) plus these Bootstrap 4/5-only themes.
+const BSLIB_THEMES = [
+  { name: "minty",   code: 'bs_theme(bootswatch = "minty")',   bg: "#ffffff", primary: "#78c2ad", accent: "#ffce67" },
+  { name: "litera",  code: 'bs_theme(bootswatch = "litera")',  bg: "#ffffff", primary: "#4582ec", accent: "#02b875" },
+  { name: "lux",     code: 'bs_theme(bootswatch = "lux")',     bg: "#ffffff", primary: "#1a1a1a", accent: "#6f42c1" },
+  { name: "materia", code: 'bs_theme(bootswatch = "materia")', bg: "#fafafa", primary: "#2196f3", accent: "#ff4081" },
+  { name: "morph",   code: 'bs_theme(bootswatch = "morph")',   bg: "#eef2f7", primary: "#7952b3", accent: "#3a3f44" },
+  { name: "pulse",   code: 'bs_theme(bootswatch = "pulse")',   bg: "#ffffff", primary: "#593196", accent: "#e36209" },
+  { name: "quartz",  code: 'bs_theme(bootswatch = "quartz")',  bg: "#ffffff", primary: "#a57dff", accent: "#12d6bf" },
+  { name: "sketchy", code: 'bs_theme(bootswatch = "sketchy")', bg: "#ffffff", primary: "#333333", accent: "#e3ac6c" },
+  { name: "solar",   code: 'bs_theme(bootswatch = "solar")',   bg: "#002b36", primary: "#b58900", accent: "#268bd2" },
+  { name: "vapor",   code: 'bs_theme(bootswatch = "vapor")',   bg: "#1b1425", primary: "#ff71ce", accent: "#01cdfe" },
+  { name: "zephyr",  code: 'bs_theme(bootswatch = "zephyr")',  bg: "#ffffff", primary: "#337ab7", accent: "#f0ad4e" },
+];
+
+const BSLIB_THEME_NOTE = "bslib also includes Bootstrap 4/5 versions of every theme shown above (cerulean, cosmo, cyborg, darkly, flatly, journal, lumen, sandstone, simplex, slate, spacelab, superhero, united, yeti) in the same visual family, plus these themes unique to bslib. Swatches are approximate — run bslib::bs_theme_preview() for an exact live look.";

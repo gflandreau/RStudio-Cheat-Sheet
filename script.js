@@ -180,6 +180,23 @@
     document.getElementById("shinyThemeNote").textContent = SHINY_THEME_NOTE;
   }
 
+  function renderBslibThemes() {
+    const container = document.getElementById("bslibThemeGrid");
+    container.innerHTML = BSLIB_THEMES.map(
+      (t) => `
+        <article class="theme-card">
+          <div class="theme-preview" style="background:${escapeHtml(t.bg)}">
+            <div class="theme-navbar" style="background:${escapeHtml(t.primary)}"></div>
+            <div class="theme-btn" style="background:${escapeHtml(t.accent)}"></div>
+          </div>
+          <div class="fn-name">${escapeHtml(t.name)}</div>
+          <pre class="fn-example">${escapeHtml(t.code)}</pre>
+        </article>`
+    ).join("");
+
+    document.getElementById("bslibThemeNote").textContent = BSLIB_THEME_NOTE;
+  }
+
   searchBox.addEventListener("input", () => {
     if (view === "customization" && searchBox.value.trim()) {
       activeCategory = "all";
@@ -205,4 +222,5 @@
   renderGrayRamp();
   renderPalettes();
   renderShinyThemes();
+  renderBslibThemes();
 })();

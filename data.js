@@ -23,6 +23,7 @@ const CATEGORIES = [
   { id: "plotly",     name: "plotly",     blurb: "Interactive, zoomable, hoverable charts." },
   { id: "shiny",      name: "shiny",      blurb: "Build interactive web apps in R." },
   { id: "shinythemes", name: "shinythemes", blurb: "Ready-made Bootstrap themes for Shiny apps." },
+  { id: "bslib",      name: "bslib",      blurb: "Modern Bootstrap 4/5 theming for Shiny and R Markdown/Quarto." },
 ];
 
 const ENTRIES = [
@@ -342,4 +343,17 @@ const ENTRIES = [
   { cat: "shinythemes", fn: "shinytheme(theme)", desc: "Apply a ready-made Bootstrap theme to a fluidPage()/navbarPage() app.", example: 'fluidPage(theme = shinytheme("flatly"), ...)', tags: ["theme","style","bootstrap"] },
   { cat: "shinythemes", fn: "themeSelector()", desc: "Drop-in widget that lets you preview and switch between all available themes live in a running app.", example: "fluidPage(themeSelector(), ...)", tags: ["theme","preview","dev tool"] },
   { cat: "shinythemes", fn: "Available theme names", desc: "cerulean, cosmo, cyborg, darkly, flatly, journal, lumen, paper, readable, sandstone, simplex, slate, spacelab, superhero, united, yeti.", example: 'shinytheme("cyborg")', tags: ["theme","names","list"] },
+
+  // ---------------- bslib ----------------
+  { cat: "bslib", fn: "bs_theme(version, bootswatch, ...)", desc: "Create a Bootstrap 4/5 theme object, either from scratch or based on a Bootswatch theme.", example: 'bs_theme(version = 5, bootswatch = "minty")', tags: ["theme","create","bootstrap"] },
+  { cat: "bslib", fn: "bs_theme(bootswatch = \"minty\")", desc: "Apply one of the many Bootswatch 4/5 themes bslib supports (the modern successor to shinythemes).", example: 'fluidPage(theme = bs_theme(bootswatch = "minty"), ...)', tags: ["theme","bootswatch","minty"] },
+  { cat: "bslib", fn: "bs_theme(primary, secondary, base_font, ...)", desc: "Customize individual theme colors and fonts instead of using a preset Bootswatch theme.", example: 'bs_theme(primary = "#c1652f", base_font = font_google("Inter"))', tags: ["theme","custom","colors","fonts"] },
+  { cat: "bslib", fn: "bs_theme_update(theme, ...)", desc: "Modify an existing theme object (e.g. change a color) after it's already been created.", example: 'theme <- bs_theme_update(theme, primary = \"#2c3e50\")', tags: ["theme","update","modify"] },
+  { cat: "bslib", fn: "bootswatch_themes(version)", desc: "List every Bootswatch theme name available for a given Bootstrap version.", example: "bootswatch_themes(version = 5)", tags: ["theme","list","names"] },
+  { cat: "bslib", fn: "font_google(family)", desc: "Use a Google Font in a theme (downloads/embeds it automatically).", example: 'bs_theme(base_font = font_google("Inter"))', tags: ["font","google fonts","typography"] },
+  { cat: "bslib", fn: "bs_theme_preview(theme)", desc: "Launch an interactive app to preview a theme against common Bootstrap components before committing to it.", example: "bs_theme_preview(bs_theme(bootswatch = \"minty\"))", tags: ["preview","theme","interactive"] },
+  { cat: "bslib", fn: "run_with_themer(app)", desc: "Wrap a Shiny app so it launches with a live theme-customizer sidebar for interactively tweaking colors/fonts.", example: "run_with_themer(shinyApp(ui, server))", tags: ["theme","live preview","customize","shiny"] },
+  { cat: "bslib", fn: "bs_add_rules(theme, rules)", desc: "Add custom Sass rules/variables on top of a theme for fine-grained styling.", example: 'bs_add_rules(theme, "body { letter-spacing: 0.01em; }")', tags: ["sass","custom css","advanced"] },
+  { cat: "bslib", fn: "bs_get_variables(theme, varnames)", desc: "Read the computed value of theme Sass variables (e.g. to reuse a theme color in a plot).", example: 'bs_get_variables(theme, c("primary", "secondary"))', tags: ["variables","inspect","sass"] },
+  { cat: "bslib", fn: "theme: in YAML front matter (R Markdown/Quarto)", desc: "bslib themes also style R Markdown and Quarto HTML documents, not just Shiny apps.", example: 'output:\n  html_document:\n    theme:\n      bootswatch: minty', tags: ["rmarkdown","quarto","yaml","report"] },
 ];
