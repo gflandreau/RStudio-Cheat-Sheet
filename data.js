@@ -20,6 +20,7 @@ const CATEGORIES = [
   { id: "janitor",    name: "janitor",    blurb: "Fast data-cleaning helpers: names, duplicates, tables." },
   { id: "tidytext",   name: "tidytext",   blurb: "Tokenizing, tidying, and analyzing text data." },
   { id: "knitr",      name: "knitr",      blurb: "Rendering reports and formatting output tables." },
+  { id: "plotly",     name: "plotly",     blurb: "Interactive, zoomable, hoverable charts." },
 ];
 
 const ENTRIES = [
@@ -298,4 +299,18 @@ const ENTRIES = [
   { cat: "knitr", fn: "read_chunk(path)", desc: "Import labeled code chunks from an external .R script to reuse in a report.", example: 'knitr::read_chunk("analysis.R")', tags: ["chunk","external","reuse"] },
   { cat: "knitr", fn: "purl(input)", desc: "Extract just the R code from an Rmd file into a plain .R script.", example: 'knitr::purl("report.Rmd")', tags: ["extract","code","script"] },
   { cat: "knitr", fn: "```{r chunk-name, echo=FALSE}", desc: "Chunk header syntax: label the chunk, then set per-chunk options like echo/eval/warning/fig.height.", example: "```{r plot1, echo=FALSE, fig.height=4}", tags: ["chunk","syntax","rmarkdown"] },
+
+  // ---------------- plotly ----------------
+  { cat: "plotly", fn: "plot_ly(data, x, y, type, mode)", desc: "Create an interactive plot directly (scatter, bar, line, etc), independent of ggplot2.", example: 'plot_ly(mtcars, x = ~wt, y = ~mpg, type = "scatter", mode = "markers")', tags: ["interactive","plot","create"] },
+  { cat: "plotly", fn: "ggplotly(p)", desc: "Convert an existing ggplot2 plot into an interactive, zoomable/hoverable plotly plot.", example: "ggplotly(ggplot(mtcars, aes(wt, mpg)) + geom_point())", tags: ["ggplot2","convert","interactive"] },
+  { cat: "plotly", fn: "add_trace(p, ...) / add_markers() / add_lines() / add_bars()", desc: "Add another data layer (trace) to an existing plotly object.", example: 'plot_ly(df, x = ~date) %>% add_lines(y = ~actual) %>% add_lines(y = ~forecast)', tags: ["layer","trace","add"] },
+  { cat: "plotly", fn: "layout(p, title, xaxis, yaxis, legend)", desc: "Customize a plotly plot's title, axis settings, legend, and overall layout.", example: 'layout(p, title = "MPG vs Weight", xaxis = list(title = "Weight"))', tags: ["title","axis","legend","customize"] },
+  { cat: "plotly", fn: "subplot(..., nrows)", desc: "Combine multiple plotly plots into one figure, arranged in a grid.", example: "subplot(p1, p2, nrows = 2)", tags: ["combine","grid","multiple plots"] },
+  { cat: "plotly", fn: "config(p, displayModeBar = FALSE)", desc: "Configure the plot's interactivity/toolbar options (e.g. hide the mode bar, disable zoom).", example: "config(p, displayModeBar = FALSE)", tags: ["config","toolbar","options"] },
+  { cat: "plotly", fn: "toWebGL(p)", desc: "Convert an SVG-based plotly plot to WebGL rendering for better performance on large datasets.", example: "toWebGL(p)", tags: ["performance","webgl","large data"] },
+  { cat: "plotly", fn: "animation_opts(p, frame, transition)", desc: "Control animation timing when a plot has a frame aesthetic (e.g. animating over time/year).", example: "animation_opts(p, frame = 1000, transition = 500)", tags: ["animation","frame","time"] },
+  { cat: "plotly", fn: "highlight(p, on, off)", desc: "Enable linked brushing/highlighting of points across multiple coordinated plots.", example: 'highlight(p, on = "plotly_hover")', tags: ["highlight","brushing","linked plots"] },
+  { cat: "plotly", fn: "event_data(\"plotly_click\")", desc: "Capture interactive click/hover/selection events from a plot inside a Shiny app.", example: 'event_data("plotly_click", source = "myplot")', tags: ["shiny","event","interactive","click"] },
+  { cat: "plotly", fn: "plotlyOutput(outputId) / renderPlotly({...})", desc: "Shiny UI/server pair for embedding a plotly plot in an app.", example: "output$plot <- renderPlotly({ plot_ly(df, x = ~x, y = ~y) })", tags: ["shiny","output","render"] },
+  { cat: "plotly", fn: "save_image(p, file)", desc: "Export a plotly plot to a static image file (PNG, JPEG, PDF, SVG) — requires the kaleido engine.", example: 'save_image(p, "plot.png")', tags: ["export","save","image"] },
 ];
