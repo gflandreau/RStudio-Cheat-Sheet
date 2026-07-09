@@ -532,6 +532,39 @@ code, .mono { font-family: "JetBrains Mono", "Consolas", monospace; }
   word-break: break-word;
 }
 
+/* ---------- ggplot2 theme gallery ---------- */
+
+.ggtheme-preview {
+  position: relative;
+  height: 62px;
+  margin: 12px;
+  border: 1px dashed var(--border);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.ggtheme-grid {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 1px;
+}
+
+.ggtheme-card .theme-name {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-transform: none;
+  padding: 0 0.75rem;
+}
+
+.theme-desc {
+  font-size: 0.78rem;
+  color: var(--ink-soft);
+  padding: 0.35rem 0.75rem 0;
+  margin: 0;
+}
+
 /* ---------- Footer ---------- */
 
 .footer {

@@ -200,6 +200,33 @@
     document.getElementById("bslibThemeNote").textContent = BSLIB_THEME_NOTE;
   }
 
+  function renderGgplotThemes() {
+    const container = document.getElementById("ggplotThemeGrid");
+    container.innerHTML = GGPLOT_THEMES.map((t) => {
+      const borderStyle = t.axisLines
+        ? "border-bottom:2px solid #333; border-left:2px solid #333;"
+        : t.border
+        ? `border:2px solid ${t.borderColor};`
+        : "";
+      const gridLines = t.gridColor
+        ? [22, 50, 78]
+            .map((pct) => `<span class="ggtheme-grid" style="top:${pct}%; background:${escapeHtml(t.gridColor)}"></span>`)
+            .join("")
+        : "";
+      return `
+        <article class="theme-card ggtheme-card">
+          <div class="ggtheme-preview" style="background:${escapeHtml(t.panelBg)}; ${borderStyle}">
+            ${gridLines}
+          </div>
+          <div class="fn-name theme-name">${escapeHtml(t.name)}</div>
+          <p class="fn-desc theme-desc">${escapeHtml(t.desc)}</p>
+          <pre class="fn-example">${escapeHtml(t.code)}</pre>
+        </article>`;
+    }).join("");
+
+    document.getElementById("ggplotThemeNote").textContent = GGPLOT_THEME_NOTE;
+  }
+
   searchBox.addEventListener("input", () => {
     if (view === "customization" && searchBox.value.trim()) {
       activeCategory = "all";
@@ -240,6 +267,7 @@
   renderColors();
   renderGrayRamp();
   renderPalettes();
+  renderGgplotThemes();
   renderShinyThemes();
   renderBslibThemes();
 })();

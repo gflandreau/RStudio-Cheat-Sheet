@@ -304,3 +304,20 @@ const BSLIB_THEMES = [
 ];
 
 const BSLIB_THEME_NOTE = "bslib also includes Bootstrap 4/5 versions of every theme shown above (cerulean, cosmo, cyborg, darkly, flatly, journal, lumen, sandstone, simplex, slate, spacelab, superhero, united, yeti) in the same visual family, plus these themes unique to bslib. Swatches are approximate — run bslib::bs_theme_preview() for an exact live look.";
+
+// ggplot2's nine built-in complete themes. panelBg = plot panel background,
+// gridColor = major gridline color (null = no gridlines), border/borderColor
+// = full panel border, axisLines = keep just x/y axis lines (theme_classic).
+const GGPLOT_THEMES = [
+  { name: "theme_gray() (default)", code: "ggplot(...) + theme_gray()", desc: "ggplot2's default: grey panel with white gridlines — applied automatically if you don't add a theme.", panelBg: "#EBEBEB", gridColor: "#FFFFFF" },
+  { name: "theme_bw()",       code: "ggplot(...) + theme_bw()",       desc: "White panel, grey gridlines, full border — the classic black-and-white look.", panelBg: "#FFFFFF", gridColor: "#EBEBEB", border: true, borderColor: "#333333" },
+  { name: "theme_linedraw()", code: "ggplot(...) + theme_linedraw()", desc: "Crisp black lines on white for high-contrast, print-ready plots.", panelBg: "#FFFFFF", gridColor: "#000000", border: true, borderColor: "#000000" },
+  { name: "theme_light()",    code: "ggplot(...) + theme_light()",    desc: "Light grey gridlines and a soft grey border — lighter than theme_bw().", panelBg: "#FFFFFF", gridColor: "#DEDEDE", border: true, borderColor: "#B3B3B3" },
+  { name: "theme_dark()",     code: "ggplot(...) + theme_dark()",     desc: "Dark grey panel that makes bright data colors pop — not a full dark mode (background stays white).", panelBg: "#7F7F7F", gridColor: "#6B6B6B" },
+  { name: "theme_minimal()",  code: "ggplot(...) + theme_minimal()",  desc: "No panel background or border, just faint gridlines — clean and modern, the most commonly used alternative to the default.", panelBg: "#FFFFFF", gridColor: "#EBEBEB" },
+  { name: "theme_classic()",  code: "ggplot(...) + theme_classic()",  desc: "White background, no gridlines, but keeps x/y axis lines — the classic base-R plot() look.", panelBg: "#FFFFFF", axisLines: true },
+  { name: "theme_void()",     code: "ggplot(...) + theme_void()",     desc: "Strips away everything but the data itself — no axes, gridlines, ticks, or background.", panelBg: "transparent" },
+  { name: "theme_test()",     code: "ggplot(...) + theme_test()",     desc: "White background with a border but no gridlines — meant for clean statistical/publication figures.", panelBg: "#FFFFFF", border: true, borderColor: "#333333" },
+];
+
+const GGPLOT_THEME_NOTE = "These are ggplot2's built-in complete themes (theme_*()), which control the plot's chrome — panel background, gridlines, and borders — not data colors. Add one with + theme_minimal() etc. after your geoms; combine with a scale_color_*()/scale_fill_*() from the palettes above for full control.";
