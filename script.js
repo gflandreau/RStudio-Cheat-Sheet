@@ -88,13 +88,27 @@
   }
 
   function cardHtml(entry) {
+    const hasFull = !!entry.full;
     return `
-      <article class="fn-card">
+      <article class="fn-card${hasFull ? " has-full" : ""}"${hasFull ? ` data-idx="${ENTRIES.indexOf(entry)}"` : ""}>
         <span class="fn-cat">${escapeHtml(catName(entry.cat))}</span>
         <div class="fn-name">${escapeHtml(entry.fn)}</div>
         <p class="fn-desc">${escapeHtml(entry.desc)}</p>
         <pre class="fn-example">${escapeHtml(entry.example)}</pre>
+        ${hasFull ? '<button class="fn-full-btn" type="button">View full example &rarr;</button>' : ""}
       </article>`;
+  }
+
+  function openModal(entry) {
+    document.getElementById("modalCat").textContent = catName(entry.cat);
+    document.getElementById("modalTitle").textContent = entry.fn;
+    document.getElementById("modalDesc").textContent = entry.desc;
+    document.getElementById("modalExample").textContent = entry.full;
+    document.getElementById("modalOverlay").hidden = false;
+  }
+
+  function closeModal() {
+    document.getElementById("modalOverlay").hidden = true;
   }
 
   function render() {
@@ -203,6 +217,22 @@
     [...categoryNav.querySelectorAll("button")].forEach((b) =>
       b.classList.toggle("active", b.dataset.view === "customization")
     );
+  });
+
+  cardGrid.addEventListener("click", (e) => {
+    const btn = e.target.closest(".fn-full-btn");
+    if (!btn) return;
+    const idx = Number(btn.closest(".fn-card").dataset.idx);
+    openModal(ENTRIES[idx]);
+  });
+
+  const modalOverlay = document.getElementById("modalOverlay");
+  document.getElementById("modalClose").addEventListener("click", closeModal);
+  modalOverlay.addEventListener("click", (e) => {
+    if (e.target === modalOverlay) closeModal();
+  });
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && !modalOverlay.hidden) closeModal();
   });
 
   buildNav();

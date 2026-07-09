@@ -8,17 +8,17 @@ const CATEGORIES = [
   { id: "base",       name: "Base R",     blurb: "Core language: vectors, control flow, apply family, I/O." },
   { id: "dplyr",      name: "dplyr",      blurb: "Data wrangling verbs: filter, select, mutate, join, summarise." },
   { id: "tidyr",      name: "tidyr",      blurb: "Reshaping data: long/wide, splitting, filling, nesting." },
+  { id: "tidyverse",  name: "Tidyverse misc", blurb: "purrr, tibble, readr, and other tidyverse odds and ends." },
+  { id: "tidytext",   name: "tidytext",   blurb: "Tokenizing, tidying, and analyzing text data." },
   { id: "ggplot2",    name: "ggplot2",    blurb: "Grammar-of-graphics plotting." },
   { id: "stringr",    name: "stringr",    blurb: "Consistent, readable string manipulation." },
   { id: "lubridate",  name: "lubridate",  blurb: "Parsing and arithmetic on dates and times." },
   { id: "rvest",      name: "rvest",      blurb: "Web scraping: pull data out of HTML pages." },
   { id: "scales",     name: "scales",     blurb: "Axis/label formatting and palette helpers." },
-  { id: "tidyverse",  name: "Tidyverse misc", blurb: "purrr, tibble, readr, and other tidyverse odds and ends." },
   { id: "forcats",    name: "forcats",    blurb: "Reordering, collapsing, and cleaning up factor levels." },
   { id: "stats",      name: "Stats & modeling", blurb: "Base R modeling and hypothesis-testing functions." },
   { id: "broom",      name: "broom",      blurb: "Turn model objects into tidy data frames." },
   { id: "janitor",    name: "janitor",    blurb: "Fast data-cleaning helpers: names, duplicates, tables." },
-  { id: "tidytext",   name: "tidytext",   blurb: "Tokenizing, tidying, and analyzing text data." },
   { id: "knitr",      name: "knitr",      blurb: "Rendering reports and formatting output tables." },
   { id: "plotly",     name: "plotly",     blurb: "Interactive, zoomable, hoverable charts." },
   { id: "shiny",      name: "shiny",      blurb: "Build interactive web apps in R." },
@@ -131,7 +131,7 @@ const ENTRIES = [
   { cat: "tidyr", fn: "uncount(data, weights)", desc: "Duplicate rows according to a weighting/count column (opposite of count()).", example: "uncount(df, n)", tags: ["expand","repeat","rows"] },
 
   // ---------------- ggplot2 ----------------
-  { cat: "ggplot2", fn: "ggplot(data, aes(x, y))", desc: "Initialize a plot and map data columns to visual aesthetics.", example: 'ggplot(mtcars, aes(x = wt, y = mpg))', tags: ["initialize","aesthetics","setup"] },
+  { cat: "ggplot2", fn: "ggplot(data, aes(x, y))", desc: "Initialize a plot and map data columns to visual aesthetics. On its own this just sets up the coordinate system — click through for a complete, ready-to-run plot.", example: 'ggplot(mtcars, aes(x = wt, y = mpg))', tags: ["initialize","aesthetics","setup"], full: 'ggplot(mtcars, aes(x = wt, y = mpg, color = factor(cyl))) +\n  geom_point(size = 3, alpha = 0.8) +\n  geom_smooth(method = "lm", se = FALSE) +\n  labs(\n    title = "Fuel Efficiency vs. Weight",\n    x = "Weight (1000 lbs)",\n    y = "Miles per Gallon",\n    color = "Cylinders"\n  ) +\n  theme_minimal()' },
   { cat: "ggplot2", fn: "geom_point()", desc: "Scatterplot layer.", example: "ggplot(mtcars, aes(wt, mpg)) + geom_point()", tags: ["scatter","points"] },
   { cat: "ggplot2", fn: "geom_line()", desc: "Line layer, typically for time series or ordered data.", example: "ggplot(df, aes(date, value)) + geom_line()", tags: ["line","time series"] },
   { cat: "ggplot2", fn: "geom_bar()", desc: "Bar chart of counts (computes counts automatically from raw data).", example: "ggplot(df, aes(category)) + geom_bar()", tags: ["bar","count","categorical"] },
@@ -304,7 +304,7 @@ const ENTRIES = [
   { cat: "knitr", fn: "```{r chunk-name, echo=FALSE}", desc: "Chunk header syntax: label the chunk, then set per-chunk options like echo/eval/warning/fig.height.", example: "```{r plot1, echo=FALSE, fig.height=4}", tags: ["chunk","syntax","rmarkdown"] },
 
   // ---------------- plotly ----------------
-  { cat: "plotly", fn: "plot_ly(data, x, y, type, mode)", desc: "Create an interactive plot directly (scatter, bar, line, etc), independent of ggplot2.", example: 'plot_ly(mtcars, x = ~wt, y = ~mpg, type = "scatter", mode = "markers")', tags: ["interactive","plot","create"] },
+  { cat: "plotly", fn: "plot_ly(data, x, y, type, mode)", desc: "Create an interactive plot directly (scatter, bar, line, etc), independent of ggplot2. Click through for a complete, ready-to-run plot with layout and labels.", example: 'plot_ly(mtcars, x = ~wt, y = ~mpg, type = "scatter", mode = "markers")', tags: ["interactive","plot","create"], full: 'plot_ly(\n  data = mtcars,\n  x = ~wt, y = ~mpg,\n  type = "scatter", mode = "markers",\n  color = ~factor(cyl),\n  marker = list(size = 10)\n) %>%\n  layout(\n    title = "Fuel Efficiency vs. Weight",\n    xaxis = list(title = "Weight (1000 lbs)"),\n    yaxis = list(title = "Miles per Gallon")\n  )' },
   { cat: "plotly", fn: "ggplotly(p)", desc: "Convert an existing ggplot2 plot into an interactive, zoomable/hoverable plotly plot.", example: "ggplotly(ggplot(mtcars, aes(wt, mpg)) + geom_point())", tags: ["ggplot2","convert","interactive"] },
   { cat: "plotly", fn: "add_trace(p, ...) / add_markers() / add_lines() / add_bars()", desc: "Add another data layer (trace) to an existing plotly object.", example: 'plot_ly(df, x = ~date) %>% add_lines(y = ~actual) %>% add_lines(y = ~forecast)', tags: ["layer","trace","add"] },
   { cat: "plotly", fn: "layout(p, title, xaxis, yaxis, legend)", desc: "Customize a plotly plot's title, axis settings, legend, and overall layout.", example: 'layout(p, title = "MPG vs Weight", xaxis = list(title = "Weight"))', tags: ["title","axis","legend","customize"] },
