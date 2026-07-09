@@ -282,6 +282,10 @@ code, .mono { font-family: "JetBrains Mono", "Consolas", monospace; }
   backdrop-filter: blur(2px);
 }
 
+.modal-overlay[hidden] {
+  display: none;
+}
+
 .modal {
   position: relative;
   width: 100%;
