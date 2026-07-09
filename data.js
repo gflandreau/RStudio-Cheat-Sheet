@@ -5,22 +5,33 @@
    ============================================================ */
 
 const CATEGORIES = [
+  // --- Foundation ---
   { id: "base",       name: "Base R",     blurb: "Core language: vectors, control flow, apply family, I/O." },
+  // --- Import ---
+  { id: "rvest",      name: "rvest",      blurb: "Web scraping: pull data out of HTML pages." },
+  // --- Clean ---
+  { id: "janitor",    name: "janitor",    blurb: "Fast data-cleaning helpers: names, duplicates, tables." },
+  // --- Wrangle & reshape (kept together as the "tidy" group) ---
   { id: "dplyr",      name: "dplyr",      blurb: "Data wrangling verbs: filter, select, mutate, join, summarise." },
   { id: "tidyr",      name: "tidyr",      blurb: "Reshaping data: long/wide, splitting, filling, nesting." },
   { id: "tidyverse",  name: "Tidyverse misc", blurb: "purrr, tibble, readr, and other tidyverse odds and ends." },
   { id: "tidytext",   name: "tidytext",   blurb: "Tokenizing, tidying, and analyzing text data." },
-  { id: "ggplot2",    name: "ggplot2",    blurb: "Grammar-of-graphics plotting." },
+  // --- Column-type cleanup ---
   { id: "stringr",    name: "stringr",    blurb: "Consistent, readable string manipulation." },
   { id: "lubridate",  name: "lubridate",  blurb: "Parsing and arithmetic on dates and times." },
-  { id: "rvest",      name: "rvest",      blurb: "Web scraping: pull data out of HTML pages." },
-  { id: "scales",     name: "scales",     blurb: "Axis/label formatting and palette helpers." },
   { id: "forcats",    name: "forcats",    blurb: "Reordering, collapsing, and cleaning up factor levels." },
+  // --- Explore, summarize & model ---
+  { id: "skimr",      name: "skimr",      blurb: "One-screen summary overview of a whole dataset." },
   { id: "stats",      name: "Stats & modeling", blurb: "Base R modeling and hypothesis-testing functions." },
   { id: "broom",      name: "broom",      blurb: "Turn model objects into tidy data frames." },
-  { id: "janitor",    name: "janitor",    blurb: "Fast data-cleaning helpers: names, duplicates, tables." },
-  { id: "knitr",      name: "knitr",      blurb: "Rendering reports and formatting output tables." },
+  { id: "gtsummary",  name: "gtsummary",  blurb: "Publication-ready summary and regression tables." },
+  // --- Visualize ---
+  { id: "scales",     name: "scales",     blurb: "Axis/label formatting and palette helpers." },
+  { id: "ggplot2",    name: "ggplot2",    blurb: "Grammar-of-graphics plotting." },
   { id: "plotly",     name: "plotly",     blurb: "Interactive, zoomable, hoverable charts." },
+  // --- Report ---
+  { id: "knitr",      name: "knitr",      blurb: "Rendering reports and formatting output tables." },
+  // --- Interactive apps & theming ---
   { id: "shiny",      name: "shiny",      blurb: "Build interactive web apps in R." },
   { id: "shinythemes", name: "shinythemes", blurb: "Ready-made Bootstrap themes for Shiny apps." },
   { id: "bslib",      name: "bslib",      blurb: "Modern Bootstrap 4/5 theming for Shiny and R Markdown/Quarto." },
@@ -356,4 +367,25 @@ const ENTRIES = [
   { cat: "bslib", fn: "bs_add_rules(theme, rules)", desc: "Add custom Sass rules/variables on top of a theme for fine-grained styling.", example: 'bs_add_rules(theme, "body { letter-spacing: 0.01em; }")', tags: ["sass","custom css","advanced"] },
   { cat: "bslib", fn: "bs_get_variables(theme, varnames)", desc: "Read the computed value of theme Sass variables (e.g. to reuse a theme color in a plot).", example: 'bs_get_variables(theme, c("primary", "secondary"))', tags: ["variables","inspect","sass"] },
   { cat: "bslib", fn: "theme: in YAML front matter (R Markdown/Quarto)", desc: "bslib themes also style R Markdown and Quarto HTML documents, not just Shiny apps.", example: 'output:\n  html_document:\n    theme:\n      bootswatch: minty', tags: ["rmarkdown","quarto","yaml","report"] },
+
+  // ---------------- skimr ----------------
+  { cat: "skimr", fn: "skim(data)", desc: "One-screen summary of every column in a data frame — type-aware (histograms/quantiles for numeric, counts for character/factor), richer than base summary().", example: "skim(mtcars)", tags: ["summary","explore","overview","describe"] },
+  { cat: "skimr", fn: "skim(data, col1, col2)", desc: "Limit the summary to specific columns instead of the whole data frame.", example: "skim(mtcars, mpg, hp)", tags: ["summary","subset","columns"] },
+  { cat: "skimr", fn: "data %>% group_by(...) %>% skim()", desc: "Summarize separately per group by combining with dplyr's group_by() first.", example: "mtcars %>% group_by(cyl) %>% skim()", tags: ["group","summary","dplyr"] },
+  { cat: "skimr", fn: "skim_without_charts(data)", desc: "Same as skim() but without inline sparkline histograms — safer for terminals/reports that don't render unicode well.", example: "skim_without_charts(mtcars)", tags: ["summary","no charts","report"] },
+  { cat: "skimr", fn: "partition(skim_df)", desc: "Split a skim summary into a list of tibbles, one per data type, for easier downstream handling.", example: "partition(skim(mtcars))", tags: ["split","data type","tidy"] },
+  { cat: "skimr", fn: "yank(skim_df, \"numeric\")", desc: "Pull out just one data type's summary table from a skim object.", example: 'yank(skim(mtcars), "numeric")', tags: ["extract","data type"] },
+  { cat: "skimr", fn: "data %>% skim_tee()", desc: "Print a skim summary as a side effect but pass the original data through unchanged — handy mid-pipeline diagnostic.", example: "df %>% skim_tee() %>% filter(...)", tags: ["pipe","diagnostic","debug"] },
+
+  // ---------------- gtsummary ----------------
+  { cat: "gtsummary", fn: "tbl_summary(data, by, statistic)", desc: "Descriptive \"Table 1\" summarizing every column, optionally split by a grouping variable — publication-ready by default.", example: "tbl_summary(df, by = treatment_group)", tags: ["summary table","descriptive","table 1"] },
+  { cat: "gtsummary", fn: "add_p()", desc: "Add p-values comparing the grouped columns in a tbl_summary.", example: "tbl_summary(df, by = group) %>% add_p()", tags: ["p-value","compare","test"] },
+  { cat: "gtsummary", fn: "add_overall()", desc: "Add a column summarizing the whole sample in addition to the grouped columns.", example: "tbl_summary(df, by = group) %>% add_overall()", tags: ["overall","total","column"] },
+  { cat: "gtsummary", fn: "add_n()", desc: "Add a column showing the number of non-missing observations for each row.", example: "tbl_summary(df) %>% add_n()", tags: ["n","count","missing"] },
+  { cat: "gtsummary", fn: "tbl_regression(model)", desc: "Format a fitted regression model (lm, glm, etc) as a clean, publication-ready table of coefficients.", example: "tbl_regression(model, exponentiate = TRUE)", tags: ["regression","model","table","broom"] },
+  { cat: "gtsummary", fn: "add_global_p()", desc: "Add global (omnibus) p-values for categorical predictors in a tbl_regression.", example: "tbl_regression(model) %>% add_global_p()", tags: ["p-value","regression","categorical"] },
+  { cat: "gtsummary", fn: "tbl_merge(tbls, tab_spanner)", desc: "Combine multiple gtsummary tables side-by-side — e.g. comparing several models' coefficients.", example: "tbl_merge(list(tbl_model1, tbl_model2))", tags: ["combine","merge","compare models"] },
+  { cat: "gtsummary", fn: "tbl_stack(tbls)", desc: "Stack multiple gtsummary tables on top of each other (e.g. combining subgroup tables).", example: "tbl_stack(list(tbl_a, tbl_b))", tags: ["combine","stack","rows"] },
+  { cat: "gtsummary", fn: "modify_header() / modify_caption()", desc: "Customize a table's column headers or caption text.", example: 'modify_header(tbl, label = "**Variable**")', tags: ["customize","header","caption"] },
+  { cat: "gtsummary", fn: "as_gt(tbl) / as_flex_table(tbl)", desc: "Convert a gtsummary table into a gt or flextable object for further formatting/export to Word, PDF, etc.", example: "tbl %>% as_gt()", tags: ["export","convert","gt","flextable"] },
 ];
