@@ -16,6 +16,7 @@ const CATEGORIES = [
   { id: "tidyr",      name: "tidyr",      blurb: "Reshaping data: long/wide, splitting, filling, nesting." },
   { id: "tidyverse",  name: "Tidyverse misc", blurb: "purrr, tibble, readr, and other tidyverse odds and ends." },
   { id: "tidytext",   name: "tidytext",   blurb: "Tokenizing, tidying, and analyzing text data." },
+  { id: "topicmodels", name: "topicmodels", blurb: "Latent Dirichlet Allocation (LDA) topic modeling." },
   // --- Column-type cleanup ---
   { id: "stringr",    name: "stringr",    blurb: "Consistent, readable string manipulation." },
   { id: "lubridate",  name: "lubridate",  blurb: "Parsing and arithmetic on dates and times." },
@@ -388,4 +389,14 @@ const ENTRIES = [
   { cat: "gtsummary", fn: "tbl_stack(tbls)", desc: "Stack multiple gtsummary tables on top of each other (e.g. combining subgroup tables).", example: "tbl_stack(list(tbl_a, tbl_b))", tags: ["combine","stack","rows"] },
   { cat: "gtsummary", fn: "modify_header() / modify_caption()", desc: "Customize a table's column headers or caption text.", example: 'modify_header(tbl, label = "**Variable**")', tags: ["customize","header","caption"] },
   { cat: "gtsummary", fn: "as_gt(tbl) / as_flex_table(tbl)", desc: "Convert a gtsummary table into a gt or flextable object for further formatting/export to Word, PDF, etc.", example: "tbl %>% as_gt()", tags: ["export","convert","gt","flextable"] },
+
+  // ---------------- topicmodels ----------------
+  { cat: "topicmodels", fn: "LDA(dtm, k, method, control)", desc: "Fit a Latent Dirichlet Allocation topic model with k topics on a document-term matrix (build one with tidytext's cast_dtm()).", example: 'lda_model <- LDA(dtm, k = 4, control = list(seed = 1234))', tags: ["topic model","lda","fit","text"], full: "library(tidytext)\nlibrary(topicmodels)\n\ndtm <- df %>%\n  unnest_tokens(word, text) %>%\n  anti_join(stop_words) %>%\n  count(document, word) %>%\n  cast_dtm(document, word, n)\n\nlda_model <- LDA(dtm, k = 4, control = list(seed = 1234))\n\n# word probabilities per topic\ntidy(lda_model, matrix = \"beta\") %>%\n  group_by(topic) %>%\n  slice_max(beta, n = 10)\n\n# topic probabilities per document\ntidy(lda_model, matrix = \"gamma\")" },
+  { cat: "topicmodels", fn: "CTM(dtm, k, control)", desc: "Fit a Correlated Topic Model — an alternative to LDA that allows topics to be correlated with each other.", example: "ctm_model <- CTM(dtm, k = 4)", tags: ["topic model","ctm","fit","text"] },
+  { cat: "topicmodels", fn: "terms(model, n)", desc: "Extract the top n most probable terms for each topic — the quickest way to see what a topic is \"about\".", example: "terms(lda_model, 10)", tags: ["terms","topic","inspect"] },
+  { cat: "topicmodels", fn: "topics(model)", desc: "Extract the single most likely topic assignment for each document.", example: "topics(lda_model)", tags: ["topics","assign","document"] },
+  { cat: "topicmodels", fn: "posterior(model)", desc: "Get the full posterior distributions: topic-term probabilities ($terms) and document-topic probabilities ($topics).", example: "posterior(lda_model)$topics", tags: ["posterior","probability","distribution"] },
+  { cat: "topicmodels", fn: "perplexity(model, newdata)", desc: "Evaluate model fit on held-out data — lower is better; commonly used to help choose k (number of topics).", example: "perplexity(lda_model, newdata = test_dtm)", tags: ["evaluate","perplexity","choose k"] },
+  { cat: "topicmodels", fn: "tidy(lda_model, matrix = \"beta\") [tidytext]", desc: "Tidy the per-topic-per-word probabilities into a long data frame (topic, term, beta) — easiest way to explore/plot topics.", example: 'tidy(lda_model, matrix = "beta")', tags: ["tidy","beta","word probability"] },
+  { cat: "topicmodels", fn: "tidy(lda_model, matrix = \"gamma\") [tidytext]", desc: "Tidy the per-document-per-topic probabilities into a long data frame (document, topic, gamma).", example: 'tidy(lda_model, matrix = "gamma")', tags: ["tidy","gamma","document probability"] },
 ];
