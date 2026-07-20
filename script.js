@@ -123,6 +123,16 @@
     const label = activeCategory === "all" ? "all packages" : catName(activeCategory);
     resultsMeta.textContent = `${filtered.length} function${filtered.length === 1 ? "" : "s"} — ${label}`;
     searchCount.textContent = query ? `Searching for "${query}"` : `${ENTRIES.length} functions total`;
+
+    const categoryInfo = document.getElementById("categoryInfo");
+    const cat = CATEGORIES.find((c) => c.id === activeCategory);
+    if (cat && cat.docsUrl) {
+      document.getElementById("categoryBlurb").textContent = cat.blurb;
+      document.getElementById("categoryDocsLink").href = cat.docsUrl;
+      categoryInfo.hidden = false;
+    } else {
+      categoryInfo.hidden = true;
+    }
   }
 
   function renderColors() {

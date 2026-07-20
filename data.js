@@ -6,38 +6,38 @@
 
 const CATEGORIES = [
   // --- Foundation ---
-  { id: "base",       name: "Base R",     blurb: "Core language: vectors, control flow, apply family, I/O." },
+  { id: "base",       name: "Base R",     blurb: "Core language: vectors, control flow, apply family, I/O.", docsUrl: "https://stat.ethz.ch/R-manual/R-devel/library/base/html/00Index.html" },
   // --- Import ---
-  { id: "rvest",      name: "rvest",      blurb: "Web scraping: pull data out of HTML pages." },
+  { id: "rvest",      name: "rvest",      blurb: "Web scraping: pull data out of HTML pages.", docsUrl: "https://rvest.tidyverse.org/" },
   // --- Clean ---
-  { id: "janitor",    name: "janitor",    blurb: "Fast data-cleaning helpers: names, duplicates, tables." },
+  { id: "janitor",    name: "janitor",    blurb: "Fast data-cleaning helpers: names, duplicates, tables.", docsUrl: "https://sfirke.github.io/janitor/" },
   // --- Wrangle & reshape (kept together as the "tidy" group) ---
-  { id: "dplyr",      name: "dplyr",      blurb: "Data wrangling verbs: filter, select, mutate, join, summarise." },
-  { id: "tidyr",      name: "tidyr",      blurb: "Reshaping data: long/wide, splitting, filling, nesting." },
-  { id: "tidyverse",  name: "Tidyverse misc", blurb: "purrr, tibble, readr, and other tidyverse odds and ends." },
-  { id: "tidytext",   name: "tidytext",   blurb: "Tokenizing, tidying, and analyzing text data." },
-  { id: "textanalysis", name: "Text Analysis", blurb: "Filtering/cleaning tokens and regex patterns for examining text." },
-  { id: "topicmodels", name: "topicmodels", blurb: "Latent Dirichlet Allocation (LDA) topic modeling." },
+  { id: "dplyr",      name: "dplyr",      blurb: "Data wrangling verbs: filter, select, mutate, join, summarise.", docsUrl: "https://dplyr.tidyverse.org/" },
+  { id: "tidyr",      name: "tidyr",      blurb: "Reshaping data: long/wide, splitting, filling, nesting.", docsUrl: "https://tidyr.tidyverse.org/" },
+  { id: "tidyverse",  name: "Tidyverse misc", blurb: "purrr, tibble, readr, and other tidyverse odds and ends.", docsUrl: "https://www.tidyverse.org/packages/" },
+  { id: "tidytext",   name: "tidytext",   blurb: "Tokenizing, tidying, and analyzing text data.", docsUrl: "https://juliasilge.github.io/tidytext/" },
+  { id: "textanalysis", name: "Text Analysis", blurb: "Filtering/cleaning tokens and regex patterns for examining text.", docsUrl: "https://stringr.tidyverse.org/articles/regular-expressions.html" },
+  { id: "topicmodels", name: "topicmodels", blurb: "Latent Dirichlet Allocation (LDA) topic modeling.", docsUrl: "https://cran.r-project.org/web/packages/topicmodels/index.html" },
   // --- Column-type cleanup ---
-  { id: "stringr",    name: "stringr",    blurb: "Consistent, readable string manipulation." },
-  { id: "lubridate",  name: "lubridate",  blurb: "Parsing and arithmetic on dates and times." },
-  { id: "forcats",    name: "forcats",    blurb: "Reordering, collapsing, and cleaning up factor levels." },
+  { id: "stringr",    name: "stringr",    blurb: "Consistent, readable string manipulation.", docsUrl: "https://stringr.tidyverse.org/" },
+  { id: "lubridate",  name: "lubridate",  blurb: "Parsing and arithmetic on dates and times.", docsUrl: "https://lubridate.tidyverse.org/" },
+  { id: "forcats",    name: "forcats",    blurb: "Reordering, collapsing, and cleaning up factor levels.", docsUrl: "https://forcats.tidyverse.org/" },
   // --- Explore, summarize & model ---
-  { id: "skimr",      name: "skimr",      blurb: "One-screen summary overview of a whole dataset." },
-  { id: "stats",      name: "Stats & modeling", blurb: "Base R modeling and hypothesis-testing functions." },
-  { id: "tidymodels", name: "tidymodels", blurb: "Unified modeling framework: split, preprocess, fit, tune, evaluate." },
-  { id: "broom",      name: "broom",      blurb: "Turn model objects into tidy data frames." },
-  { id: "gtsummary",  name: "gtsummary",  blurb: "Publication-ready summary and regression tables." },
+  { id: "skimr",      name: "skimr",      blurb: "One-screen summary overview of a whole dataset.", docsUrl: "https://docs.ropensci.org/skimr/" },
+  { id: "stats",      name: "Stats & modeling", blurb: "Base R modeling and hypothesis-testing functions.", docsUrl: "https://stat.ethz.ch/R-manual/R-devel/library/stats/html/00Index.html" },
+  { id: "tidymodels", name: "tidymodels", blurb: "Unified modeling framework: split, preprocess, fit, tune, evaluate.", docsUrl: "https://www.tidymodels.org/" },
+  { id: "broom",      name: "broom",      blurb: "Turn model objects into tidy data frames.", docsUrl: "https://broom.tidymodels.org/" },
+  { id: "gtsummary",  name: "gtsummary",  blurb: "Publication-ready summary and regression tables.", docsUrl: "https://www.danieldsjoberg.com/gtsummary/" },
   // --- Visualize ---
-  { id: "scales",     name: "scales",     blurb: "Axis/label formatting and palette helpers." },
-  { id: "ggplot2",    name: "ggplot2",    blurb: "Grammar-of-graphics plotting." },
-  { id: "plotly",     name: "plotly",     blurb: "Interactive, zoomable, hoverable charts." },
+  { id: "scales",     name: "scales",     blurb: "Axis/label formatting and palette helpers.", docsUrl: "https://scales.r-lib.org/" },
+  { id: "ggplot2",    name: "ggplot2",    blurb: "Grammar-of-graphics plotting.", docsUrl: "https://ggplot2.tidyverse.org/" },
+  { id: "plotly",     name: "plotly",     blurb: "Interactive, zoomable, hoverable charts.", docsUrl: "https://plotly.com/r/" },
   // --- Report ---
-  { id: "knitr",      name: "knitr",      blurb: "Rendering reports and formatting output tables." },
+  { id: "knitr",      name: "knitr",      blurb: "Rendering reports and formatting output tables.", docsUrl: "https://yihui.org/knitr/" },
   // --- Interactive apps & theming ---
-  { id: "shiny",      name: "shiny",      blurb: "Build interactive web apps in R." },
-  { id: "shinythemes", name: "shinythemes", blurb: "Ready-made Bootstrap themes for Shiny apps." },
-  { id: "bslib",      name: "bslib",      blurb: "Modern Bootstrap 4/5 theming for Shiny and R Markdown/Quarto." },
+  { id: "shiny",      name: "shiny",      blurb: "Build interactive web apps in R.", docsUrl: "https://shiny.posit.co/" },
+  { id: "shinythemes", name: "shinythemes", blurb: "Ready-made Bootstrap themes for Shiny apps.", docsUrl: "https://rstudio.github.io/shinythemes/" },
+  { id: "bslib",      name: "bslib",      blurb: "Modern Bootstrap 4/5 theming for Shiny and R Markdown/Quarto.", docsUrl: "https://rstudio.github.io/bslib/" },
 ];
 
 const ENTRIES = [
