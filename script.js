@@ -1,5 +1,5 @@
 /* ============================================
-   RStudio Cheat Sheet — search, filter, render
+   RStudio Cheat Sheet: search, filter, render
    ============================================ */
 
 (function () {
@@ -121,7 +121,7 @@
     emptyState.hidden = filtered.length !== 0;
 
     const label = activeCategory === "all" ? "all packages" : catName(activeCategory);
-    resultsMeta.textContent = `${filtered.length} function${filtered.length === 1 ? "" : "s"} — ${label}`;
+    resultsMeta.textContent = `${filtered.length} function${filtered.length === 1 ? "" : "s"} in ${label}`;
     searchCount.textContent = query ? `Searching for "${query}"` : `${ENTRIES.length} functions total`;
 
     const categoryInfo = document.getElementById("categoryInfo");

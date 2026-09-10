@@ -225,35 +225,35 @@ const PALETTES = [
   },
   {
     pkg: "RColorBrewer", fn: 'brewer.pal(n, "Blues") / scale_fill_brewer(palette = "Blues")',
-    desc: "Sequential palette — use for ordered/low-to-high numeric data.",
+    desc: "Sequential palette: use for ordered/low-to-high numeric data.",
     example: 'scale_fill_brewer(palette = "Blues")',
     swatch: ["#eff3ff", "#bdd7e7", "#6baed6", "#3182bd", "#08519c"],
     tags: ["palette","brewer","sequential"],
   },
   {
     pkg: "RColorBrewer", fn: 'brewer.pal(n, "RdBu") / scale_fill_brewer(palette = "RdBu")',
-    desc: "Diverging palette — use when data has a meaningful midpoint (e.g. above/below zero).",
+    desc: "Diverging palette: use when data has a meaningful midpoint (e.g. above/below zero).",
     example: 'scale_fill_distiller(palette = "RdBu")',
     swatch: ["#ca0020", "#f4a582", "#f7f7f7", "#92c5de", "#0571b0"],
     tags: ["palette","brewer","diverging"],
   },
   {
     pkg: "RColorBrewer", fn: 'brewer.pal(n, "Set2") / scale_fill_brewer(palette = "Set2")',
-    desc: "Qualitative palette — use for unordered categories, not numeric ranges.",
+    desc: "Qualitative palette: use for unordered categories, not numeric ranges.",
     example: 'scale_fill_brewer(palette = "Set2")',
     swatch: ["#66c2a5", "#fc8d62", "#8da0cb", "#e78ac3", "#a6d854"],
     tags: ["palette","brewer","qualitative","categorical"],
   },
   {
     pkg: "scales", fn: "hue_pal()(n)",
-    desc: "ggplot2's own default evenly-spaced hue palette — what you get with no scale_* call at all.",
+    desc: "ggplot2's own default evenly-spaced hue palette, the one you get with no scale_* call at all.",
     example: "scales::hue_pal()(4)",
     swatch: ["#F8766D", "#7CAE00", "#00BFC4", "#C77CFF"],
     tags: ["palette","default","ggplot"],
   },
   {
     pkg: "grace's site palette", fn: "blue / purple accent palette",
-    desc: "The blue-to-purple gradient used across this site and grace-portfolio — handy to reuse for consistent plots.",
+    desc: "The blue-to-purple gradient used across this site and grace-portfolio, handy to reuse for consistent plots.",
     example: 'scale_fill_manual(values = c("#a8d4ee", "#8a72b8"))',
     swatch: ["#dbeefb", "#a8d4ee", "#5b8cb8", "#cdbcec", "#8a72b8"],
     tags: ["palette","custom","personal"],
@@ -285,7 +285,7 @@ const SHINY_THEMES = [
   { name: "yeti",      code: 'shinytheme("yeti")',      bg: "#ffffff", primary: "#008cba", accent: "#adafae", font: "'Open Sans', sans-serif", fontLabel: "Open Sans" },
 ];
 
-const SHINY_THEME_NOTE = "Swatches are approximate representative colors for each theme's background/navbar/accent, and each theme's name is set in its actual heading font (pulled from Bootswatch's own _variables.scss) — themes without a custom font just use the system default. For a pixel-accurate live preview, run shinythemes::themeSelector() inside an app.";
+const SHINY_THEME_NOTE = "Swatches are approximate representative colors for each theme's background/navbar/accent, and each theme's name is set in its actual heading font (pulled from Bootswatch's own _variables.scss); themes without a custom font just use the system default. For a pixel-accurate live preview, run shinythemes::themeSelector() inside an app.";
 
 // bslib supports Bootstrap 4/5 versions of every theme name above (same
 // visual family, slightly refreshed) plus these Bootstrap 4/5-only themes.
@@ -303,21 +303,21 @@ const BSLIB_THEMES = [
   { name: "zephyr",  code: 'bs_theme(bootswatch = "zephyr")',  bg: "#ffffff", primary: "#337ab7", accent: "#f0ad4e", font: "Inter, sans-serif", fontLabel: "Inter" },
 ];
 
-const BSLIB_THEME_NOTE = "bslib also includes Bootstrap 4/5 versions of every theme shown above (cerulean, cosmo, cyborg, darkly, flatly, journal, lumen, sandstone, simplex, slate, spacelab, superhero, united, yeti) in the same visual family, plus these themes unique to bslib. Swatches are approximate — run bslib::bs_theme_preview() for an exact live look.";
+const BSLIB_THEME_NOTE = "bslib also includes Bootstrap 4/5 versions of every theme shown above (cerulean, cosmo, cyborg, darkly, flatly, journal, lumen, sandstone, simplex, slate, spacelab, superhero, united, yeti) in the same visual family, plus these themes unique to bslib. Swatches are approximate; run bslib::bs_theme_preview() for an exact live look.";
 
 // ggplot2's nine built-in complete themes. panelBg = plot panel background,
 // gridColor = major gridline color (null = no gridlines), border/borderColor
 // = full panel border, axisLines = keep just x/y axis lines (theme_classic).
 const GGPLOT_THEMES = [
-  { name: "theme_gray() (default)", code: "ggplot(...) + theme_gray()", desc: "ggplot2's default: grey panel with white gridlines — applied automatically if you don't add a theme.", panelBg: "#EBEBEB", gridColor: "#FFFFFF" },
-  { name: "theme_bw()",       code: "ggplot(...) + theme_bw()",       desc: "White panel, grey gridlines, full border — the classic black-and-white look.", panelBg: "#FFFFFF", gridColor: "#EBEBEB", border: true, borderColor: "#333333" },
+  { name: "theme_gray() (default)", code: "ggplot(...) + theme_gray()", desc: "ggplot2's default: grey panel with white gridlines, applied automatically if you don't add a theme.", panelBg: "#EBEBEB", gridColor: "#FFFFFF" },
+  { name: "theme_bw()",       code: "ggplot(...) + theme_bw()",       desc: "White panel, grey gridlines, full border: the classic black-and-white look.", panelBg: "#FFFFFF", gridColor: "#EBEBEB", border: true, borderColor: "#333333" },
   { name: "theme_linedraw()", code: "ggplot(...) + theme_linedraw()", desc: "Crisp black lines on white for high-contrast, print-ready plots.", panelBg: "#FFFFFF", gridColor: "#000000", border: true, borderColor: "#000000" },
-  { name: "theme_light()",    code: "ggplot(...) + theme_light()",    desc: "Light grey gridlines and a soft grey border — lighter than theme_bw().", panelBg: "#FFFFFF", gridColor: "#DEDEDE", border: true, borderColor: "#B3B3B3" },
-  { name: "theme_dark()",     code: "ggplot(...) + theme_dark()",     desc: "Dark grey panel that makes bright data colors pop — not a full dark mode (background stays white).", panelBg: "#7F7F7F", gridColor: "#6B6B6B" },
-  { name: "theme_minimal()",  code: "ggplot(...) + theme_minimal()",  desc: "No panel background or border, just faint gridlines — clean and modern, the most commonly used alternative to the default.", panelBg: "#FFFFFF", gridColor: "#EBEBEB" },
-  { name: "theme_classic()",  code: "ggplot(...) + theme_classic()",  desc: "White background, no gridlines, but keeps x/y axis lines — the classic base-R plot() look.", panelBg: "#FFFFFF", axisLines: true },
-  { name: "theme_void()",     code: "ggplot(...) + theme_void()",     desc: "Strips away everything but the data itself — no axes, gridlines, ticks, or background.", panelBg: "transparent" },
-  { name: "theme_test()",     code: "ggplot(...) + theme_test()",     desc: "White background with a border but no gridlines — meant for clean statistical/publication figures.", panelBg: "#FFFFFF", border: true, borderColor: "#333333" },
+  { name: "theme_light()",    code: "ggplot(...) + theme_light()",    desc: "Light grey gridlines and a soft grey border, lighter than theme_bw().", panelBg: "#FFFFFF", gridColor: "#DEDEDE", border: true, borderColor: "#B3B3B3" },
+  { name: "theme_dark()",     code: "ggplot(...) + theme_dark()",     desc: "Dark grey panel that makes bright data colors pop, not a full dark mode (background stays white).", panelBg: "#7F7F7F", gridColor: "#6B6B6B" },
+  { name: "theme_minimal()",  code: "ggplot(...) + theme_minimal()",  desc: "No panel background or border, just faint gridlines; clean and modern, the most commonly used alternative to the default.", panelBg: "#FFFFFF", gridColor: "#EBEBEB" },
+  { name: "theme_classic()",  code: "ggplot(...) + theme_classic()",  desc: "White background, no gridlines, but keeps x/y axis lines: the classic base-R plot() look.", panelBg: "#FFFFFF", axisLines: true },
+  { name: "theme_void()",     code: "ggplot(...) + theme_void()",     desc: "Strips away everything but the data itself: no axes, gridlines, ticks, or background.", panelBg: "transparent" },
+  { name: "theme_test()",     code: "ggplot(...) + theme_test()",     desc: "White background with a border but no gridlines, meant for clean statistical/publication figures.", panelBg: "#FFFFFF", border: true, borderColor: "#333333" },
 ];
 
-const GGPLOT_THEME_NOTE = "These are ggplot2's built-in complete themes (theme_*()), which control the plot's chrome — panel background, gridlines, and borders — not data colors. Add one with + theme_minimal() etc. after your geoms; combine with a scale_color_*()/scale_fill_*() from the palettes above for full control.";
+const GGPLOT_THEME_NOTE = "These are ggplot2's built-in complete themes (theme_*()), which control the plot's chrome (panel background, gridlines, and borders), not data colors. Add one with + theme_minimal() etc. after your geoms; combine with a scale_color_*()/scale_fill_*() from the palettes above for full control.";
