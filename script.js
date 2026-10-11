@@ -77,7 +77,7 @@
 
   function matches(entry, query) {
     if (!query) return true;
-    const haystack = [entry.fn, entry.desc, entry.example, ...(entry.tags || []), catName(entry.cat)]
+    const haystack = [entry.fn, entry.desc, entry.example, entry.read || "", ...(entry.tags || []), catName(entry.cat)]
       .join(" ")
       .toLowerCase();
     return query
@@ -87,14 +87,25 @@
       .every((term) => haystack.includes(term));
   }
 
+  function readListHtml(text) {
+    return text
+      .split("\n")
+      .map((line) => `<li>${escapeHtml(line)}</li>`)
+      .join("");
+  }
+
   function cardHtml(entry) {
     const hasFull = !!entry.full;
+    const readBlock = entry.read
+      ? `<details class="fn-read"><summary>How to read the output</summary><ul>${readListHtml(entry.read)}</ul></details>`
+      : "";
     return `
       <article class="fn-card${hasFull ? " has-full" : ""}"${hasFull ? ` data-idx="${ENTRIES.indexOf(entry)}"` : ""}>
         <span class="fn-cat">${escapeHtml(catName(entry.cat))}</span>
         <div class="fn-name">${escapeHtml(entry.fn)}</div>
         <p class="fn-desc">${escapeHtml(entry.desc)}</p>
         <pre class="fn-example">${escapeHtml(entry.example)}</pre>
+        ${readBlock}
         ${hasFull ? '<button class="fn-full-btn" type="button">View full example &rarr;</button>' : ""}
       </article>`;
   }
@@ -104,6 +115,9 @@
     document.getElementById("modalTitle").textContent = entry.fn;
     document.getElementById("modalDesc").textContent = entry.desc;
     document.getElementById("modalExample").textContent = entry.full;
+    const modalRead = document.getElementById("modalRead");
+    document.getElementById("modalReadList").innerHTML = entry.read ? readListHtml(entry.read) : "";
+    modalRead.hidden = !entry.read;
     document.getElementById("modalOverlay").hidden = false;
   }
 

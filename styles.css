@@ -267,6 +267,56 @@ code, .mono { font-family: "JetBrains Mono", "Consolas", monospace; }
   word-break: break-word;
 }
 
+.fn-read {
+  margin-top: 0.6rem;
+  background: var(--stone);
+  border-left: 3px solid var(--terracotta-light);
+  border-radius: 8px;
+  font-size: 0.8rem;
+  color: var(--ink);
+}
+
+.fn-read summary {
+  cursor: pointer;
+  padding: 0.45rem 0.7rem;
+  font-weight: 700;
+  font-size: 0.74rem;
+  letter-spacing: 0.03em;
+  color: var(--terracotta-deep);
+  list-style: none;
+}
+
+.fn-read summary::-webkit-details-marker { display: none; }
+
+.fn-read summary::before {
+  content: "+";
+  display: inline-block;
+  width: 1em;
+  font-weight: 700;
+}
+
+.fn-read[open] summary::before { content: "\2212"; }
+
+.fn-read ul,
+.modal-read ul {
+  margin: 0;
+  padding: 0 0.8rem 0.6rem 1.6rem;
+}
+
+.fn-read li,
+.modal-read li {
+  margin-bottom: 0.35rem;
+  line-height: 1.45;
+}
+
+.modal-read {
+  margin-top: 1.2rem;
+  font-size: 0.88rem;
+  color: var(--ink);
+}
+
+.modal-read ul { padding: 0 0 0 1.2rem; }
+
 .fn-card.has-full { border-left: 4px solid var(--terracotta); background: linear-gradient(180deg, var(--card) 0%, var(--card) 100%); }
 
 .fn-full-btn {
